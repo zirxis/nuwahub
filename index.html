@@ -496,23 +496,7 @@
         initParticles();
         animateParticles();
 
-        // --- 2. Dark Mode Logic ---
-        const themeBtn = document.getElementById('themeBtn');
-        const icon = themeBtn.querySelector('i');
-        
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.setAttribute('data-theme', 'dark');
-            icon.classList.replace('fa-moon', 'fa-sun');
-        }
-
-        themeBtn.addEventListener('click', () => {
-            const isDark = document.body.getAttribute('data-theme') === 'dark';
-            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-            icon.classList.replace(isDark ? 'fa-sun' : 'fa-moon', isDark ? 'fa-moon' : 'fa-sun');
-            localStorage.setItem('theme', isDark ? 'light' : 'dark');
-        });
-
-        // --- 3. 3D Tilt Effect for Cards (Vanilla JS) ---
+        // --- 2. 3D Tilt Effect for Cards (Vanilla JS) ---
         const cards = document.querySelectorAll('.tilt-card');
 
         cards.forEach(card => {
@@ -543,6 +527,9 @@
             mobileMenu.classList.toggle('active');
         }
         menuBtn.addEventListener('click', toggleMenu);
+
+        // --- 4. Theme Toggle (Handled by theme.js) ---
+        // All theme functionality is now in theme.js
 
         // --- Authentication UI Management ---
         function updateAuthUI() {
