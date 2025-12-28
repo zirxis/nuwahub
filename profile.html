@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي - NUWAHUB</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #f3f6fc;
+            --surface: rgba(255, 255, 255, 0.7);
+            --text-main: #0f172a;
+            --text-sec: #475569;
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.3);
+            --accent: #06b6d4;
+            --border: rgba(255, 255, 255, 0.6);
+            --card-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+            --error: #ef4444;
+            --success: #10b981;
+        }
+
+        [data-theme="dark"] {
+            --bg: #030712;
+            --surface: rgba(30, 41, 59, 0.6);
+            --text-main: #f8fafc;
+            --text-sec: #94a3b8;
+            --primary: #60a5fa;
+            --primary-glow: rgba(96, 165, 250, 0.2);
+            --accent: #22d3ee;
+            --border: rgba(255, 255, 255, 0.05);
+            --card-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+            --error: #f87171;
+            --success: #34d399;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            transition: background 0.5s ease;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--surface);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: var(--primary-glow);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--primary);
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .profile-info h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-info p {
+            color: var(--text-sec);
+            margin-bottom: 5px;
+        }
+
+        .profile-badges {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: var(--primary-glow);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--primary);
+        }
+
+        /* Profile Content */
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+        }
+
+        .card h2 i {
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 10px;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--text-sec);
+        }
+
+        .info-value {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--primary-glow);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border: 1px solid var(--error);
+        }
+
+        .btn-danger:hover {
+            background: var(--error);
+            color: white;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Alert */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .alert.success {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .alert.error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border: 1px solid var(--error);
+        }
+
+        .alert.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: var(--card-shadow);
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: var(--error);
+        }
+
+        .modal-content p {
+            color: var(--text-sec);
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .button-group .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="nav-brand">
+            <i class="fas fa-heartbeat"></i> NUWAHUB
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="contact.html">اتصل بنا</a></li>
+            <li><button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button></li>
+            <li><a href="profile.html" style="color: var(--primary);">الملف الشخصي</a></li>
+            <li><button class="btn btn-danger" onclick="logoutUser()" style="width: auto; margin: 0; padding: 8px 16px;"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button></li>
+        </ul>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="alert" id="alertMessage"></div>
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-info">
+                <h1 id="displayName">محمد علي</h1>
+                <p><i class="fas fa-envelope"></i> <span id="displayEmail">user@example.com</span></p>
+                <p><i class="fas fa-graduation-cap"></i> <span id="displayUserType">طالب</span></p>
+                <div class="profile-badges">
+                    <span class="badge"><i class="fas fa-calendar"></i> عضو منذ <span id="joinDate">2024</span></span>
+                    <span class="badge" id="statusBadge"><i class="fas fa-check-circle"></i> نشط</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="profile-content">
+            <!-- Personal Information -->
+            <div class="card">
+                <h2><i class="fas fa-user-circle"></i> البيانات الشخصية</h2>
+                <div id="personalInfo">
+                    <div class="info-row">
+                        <span class="info-label">الاسم الكامل:</span>
+                        <span class="info-value" id="infoName">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">البريد الإلكتروني:</span>
+                        <span class="info-value" id="infoEmail">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">نوع المستخدم:</span>
+                        <span class="info-value" id="infoUserType">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">تاريخ الانضمام:</span>
+                        <span class="info-value" id="infoJoinDate">-</span>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" onclick="toggleEdit('personal')" style="width: 100%; margin-top: 20px;">
+                    <i class="fas fa-edit"></i> تعديل البيانات
+                </button>
+            </div>
+
+            <!-- Account Settings -->
+            <div class="card">
+                <h2><i class="fas fa-cog"></i> إعدادات الحساب</h2>
+                <div class="form-group">
+                    <label>تفعيل الإشعارات</label>
+                    <input type="checkbox" id="notificationsToggle" style="width: auto;" checked>
+                    <span style="margin-right: 10px; color: var(--text-sec);">تلقي إشعارات البريد الإلكتروني</span>
+                </div>
+                <div class="form-group">
+                    <label>الخصوصية</label>
+                    <select id="privacyLevel">
+                        <option value="public">عام - يمكن للجميع رؤية ملفي الشخصي</option>
+                        <option value="friends">الأصدقاء فقط</option>
+                        <option value="private">خاص - أنا فقط</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="saveSettings()" style="margin-top: 20px;">
+                    <i class="fas fa-save"></i> حفظ الإعدادات
+                </button>
+            </div>
+        </div>
+
+        <!-- Security Settings -->
+        <div class="card" style="grid-column: 1 / -1;">
+            <h2><i class="fas fa-shield-alt"></i> إعدادات الأمان</h2>
+            <div class="info-row">
+                <span class="info-label">كلمة المرور</span>
+                <span class="info-value">آخر تغيير: <span id="lastPasswordChange">لم يتم التغيير</span></span>
+            </div>
+            <button class="btn btn-secondary" onclick="toggleEdit('password')" style="margin-top: 15px;">
+                <i class="fas fa-lock"></i> تغيير كلمة المرور
+            </button>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="passwordModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-lock"></i> تغيير كلمة المرور</h2>
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label for="currentPassword">كلمة المرور الحالية</label>
+                    <input type="password" id="currentPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">كلمة المرور الجديدة</label>
+                    <input type="password" id="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmNewPassword">تأكيد كلمة المرور</label>
+                    <input type="password" id="confirmNewPassword" required>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">تحديث كلمة المرور</button>
+                    <button type="button" class="btn btn-secondary" onclick="toggleEdit('password')">إغلاق</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirm Logout Modal -->
+    <div class="modal" id="logoutModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</h2>
+            <p>هل أنت متأكد من رغبتك في تسجيل الخروج من حسابك؟</p>
+            <div class="button-group">
+                <button class="btn btn-danger" onclick="confirmLogout()">نعم، تسجيل الخروج</button>
+                <button class="btn btn-secondary" onclick="toggleModal('logoutModal')">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+        // Load profile on page load
+        window.addEventListener('load', () => {
+            const user = getCurrentUser();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Display user information
+            document.getElementById('displayName').textContent = user.name || 'المستخدم';
+            document.getElementById('displayEmail').textContent = user.email;
+            document.getElementById('displayUserType').textContent = getUserTypeLabel(user.userType);
+            document.getElementById('joinDate').textContent = new Date(user.joinDate).getFullYear();
+
+            // Display personal info
+            document.getElementById('infoName').textContent = user.name || '-';
+            document.getElementById('infoEmail').textContent = user.email;
+            document.getElementById('infoUserType').textContent = getUserTypeLabel(user.userType);
+            document.getElementById('infoJoinDate').textContent = new Date(user.joinDate).toLocaleDateString('ar-EG');
+        });
+
+        function getUserTypeLabel(type) {
+            const labels = {
+                'student': 'طالب',
+                'professor': 'أستاذ',
+                'admin': 'مسؤول'
+            };
+            return labels[type] || type;
+        }
+
+        function toggleEdit(type) {
+            if (type === 'password') {
+                toggleModal('passwordModal');
+            }
+        }
+
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.toggle('show');
+        }
+
+        function saveSettings() {
+            const notificationsEnabled = document.getElementById('notificationsToggle').checked;
+            const privacyLevel = document.getElementById('privacyLevel').value;
+
+            const user = getCurrentUser();
+            user.notifications = notificationsEnabled;
+            user.privacy = privacyLevel;
+            updateUserData(user);
+
+            showAlert('تم حفظ الإعدادات بنجاح', 'success');
+        }
+
+        document.getElementById('passwordForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmNewPassword').value;
+
+            const user = getCurrentUser();
+
+            if (user.password !== currentPassword) {
+                showAlert('كلمة المرور الحالية غير صحيحة', 'error');
+                return;
+            }
+
+            if (newPassword.length < 6) {
+                showAlert('كلمة المرور الجديدة يجب أن تكون 6 أحرف على الأقل', 'error');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                showAlert('كلمات المرور الجديدة غير متطابقة', 'error');
+                return;
+            }
+
+            user.password = newPassword;
+            user.lastPasswordChange = new Date().toISOString();
+            updateUserData(user);
+
+            document.getElementById('passwordForm').reset();
+            toggleModal('passwordModal');
+            showAlert('تم تحديث كلمة المرور بنجاح', 'success');
+        });
+
+        function showAlert(message, type) {
+            const alert = document.getElementById('alertMessage');
+            alert.textContent = message;
+            alert.className = `alert ${type} show`;
+
+            setTimeout(() => {
+                alert.classList.remove('show');
+            }, 5000);
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            const passwordModal = document.getElementById('passwordModal');
+            if (e.target === passwordModal) {
+                passwordModal.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
