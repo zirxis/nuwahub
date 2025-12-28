@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل معنا - NUWAHUB</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1a73e8;
+            --turquoise: #00acc1;
+            --dark-blue: #0d47a1;
+            --light-blue: #e3f2fd;
+            --white: #ffffff;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-600: #6c757d;
+            --gray-800: #343a40;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        @font-face {
+            font-family: 'Arabic';
+            src: url('Arabic.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            letter-spacing: 0.3px;
+            color: var(--gray-800);
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-size: 16px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+            color: var(--dark-blue);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+
+        button {
+            font-family: 'Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-800);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-top: 80px;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--primary-blue), var(--turquoise));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 4rem 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h2 {
+            color: var(--dark-blue);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--gray-100);
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            background: var(--light-blue);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--turquoise));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h4 {
+            color: var(--dark-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-details p {
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form h2 {
+            color: var(--dark-blue);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gray-700);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--turquoise));
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(26, 115, 232, 0.3);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .faq-section h2 {
+            color: var(--dark-blue);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .faq-item {
+            background: var(--gray-100);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: var(--light-blue);
+        }
+
+        .faq-question h4 {
+            color: var(--dark-blue);
+            margin: 0;
+        }
+
+        .faq-question i {
+            color: var(--turquoise);
+            transition: var(--transition);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-answer.active {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* Map Section */
+        .map-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .map-section h2 {
+            color: var(--dark-blue);
+            margin-bottom: 2rem;
+        }
+
+        .map-placeholder {
+            background: var(--gray-100);
+            border: 2px dashed var(--turquoise);
+            border-radius: 15px;
+            padding: 4rem;
+            transition: var(--transition);
+        }
+
+        .map-placeholder:hover {
+            background: var(--light-blue);
+        }
+
+        .map-placeholder i {
+            font-size: 4rem;
+            color: var(--turquoise);
+            margin-bottom: 1rem;
+        }
+
+        .map-placeholder h3 {
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .map-placeholder p {
+            color: var(--gray-600);
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .success-message.show {
+            display: flex;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-800);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(227, 242, 253, 0.95) 100%);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                width: 100%;
+                text-align: right;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                z-index: 999;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+
+            .nav-links.active {
+                display: flex;
+                max-height: 600px;
+            }
+
+            .nav-links li {
+                padding: 1.2rem 1.5rem;
+                border-bottom: 1px solid rgba(26, 115, 232, 0.1);
+                opacity: 0;
+                animation: slideInMenu 0.4s ease forwards;
+            }
+
+            .nav-links li:nth-child(1) { animation-delay: 0.05s; }
+            .nav-links li:nth-child(2) { animation-delay: 0.1s; }
+            .nav-links li:nth-child(3) { animation-delay: 0.15s; }
+            .nav-links li:nth-child(4) { animation-delay: 0.2s; }
+            .nav-links li:nth-child(5) { animation-delay: 0.25s; }
+            .nav-links li:nth-child(6) { animation-delay: 0.3s; }
+            .nav-links li:nth-child(7) { animation-delay: 0.35s; }
+
+            .nav-links a {
+                font-weight: 600;
+                color: var(--dark-blue);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                transition: var(--transition);
+            }
+
+            .nav-links a:hover {
+                color: var(--primary-blue);
+                padding-right: 8px;
+            }
+
+            @keyframes slideInMenu {
+                from {
+                    opacity: 0;
+                    transform: translateX(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 45px;
+                height: 45px;
+                background: linear-gradient(135deg, var(--primary-blue), var(--turquoise));
+                color: var(--white);
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: var(--transition);
+                font-size: 1.3rem;
+            }
+
+            .mobile-menu-toggle:hover {
+                transform: scale(1.1);
+                box-shadow: 0 5px 15px rgba(26, 115, 232, 0.4);
+            }
+
+            .mobile-menu-toggle:active {
+                transform: scale(0.95);
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .faq-section {
+                padding: 2rem;
+            }
+
+            .map-placeholder {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="resources/nuwahub-logo.png" alt="NUWAHUB Logo">
+                <span>NUWAHUB</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="first-year.html">السنة الأولى</a></li>
+                <li><a href="second-year.html">السنة الثانية</a></li>
+                <li><a href="third-year.html">السنة الثالثة</a></li>
+                <li><a href="tips.html">نصائح دراسية</a></li>
+                <li><a href="professors.html">الأساتذة</a></li>
+                <li><a href="contact.html">تواصل معنا</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-comments"></i> تواصل معنا</h1>
+            <p>نحن هنا لمساعدتك في رحلتك الطبية</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h2><i class="fas fa-address-book"></i> معلومات التواصل</h2>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>العنوان</h4>
+                            <p>الجزائر العاصمة، الجامعة المركزية<br>المعهد الوطني للتعليم الطبي</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>الهاتف</h4>
+                            <p>+213 23 45 67 89<br>+213 55 12 34 56</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>البريد الإلكتروني</h4>
+                            <p>info@nuwahub.dz<br>support@nuwahub.dz</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>أوقات العمل</h4>
+                            <p>الأحد - الخميس: 8:00 - 17:00<br>الجمعة والسبت: مغلق</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>الشبكات الاجتماعية</h4>
+                            <p>
+                                <a href="#" style="color: var(--primary-blue); margin: 0 5px;"><i class="fab fa-facebook"></i></a>
+                                <a href="#" style="color: var(--turquoise); margin: 0 5px;"><i class="fab fa-twitter"></i></a>
+                                <a href="#" style="color: #e91e63; margin: 0 5px;"><i class="fab fa-instagram"></i></a>
+                                <a href="#" style="color: #0077b5; margin: 0 5px;"><i class="fab fa-linkedin"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h2><i class="fas fa-paper-plane"></i> أرسل رسالة</h2>
+                    
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i>
+                        <span>تم إرسال رسالتك بنجاح! سنرد عليك قريبًا.</span>
+                    </div>
+                    
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">الاسم الكامل</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">رقم الهاتف</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">موضوع الرسالة</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">اختر الموضوع</option>
+                                <option value="question">استفسار عام</option>
+                                <option value="technical">دعم تقني</option>
+                                <option value="course">استفسار عن دورة</option>
+                                <option value="professor">استفسار عن أستاذ</option>
+                                <option value="suggestion">اقتراح</option>
+                                <option value="complaint">شكوى</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="year">السنة الدراسية</label>
+                            <select id="year" name="year">
+                                <option value="">اختر السنة</option>
+                                <option value="first">السنة الأولى</option>
+                                <option value="second">السنة الثانية</option>
+                                <option value="third">السنة الثالثة</option>
+                                <option value="other">أخرى</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">نص الرسالة</label>
+                            <textarea id="message" name="message" placeholder="اكتب رسالتك هنا..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            إرسال الرسالة
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="container">
+        <div class="faq-section">
+            <h2><i class="fas fa-question-circle"></i> الأسئلة الشائعة</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h4>كيف يمكنني التسجيل في المنصة؟</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>يمكنك التسجيل بسهولة من خلال النقر على زر "تسجيل" في الصفحة الرئيسية، ثم ملء النموذج بالمعلومات المطلوبة. بعد التسجيل، ستصلك رسالة تأكيد على بريدك الإلكتروني.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h4>هل المحتوى التعليمي متاح على مدار الساعة؟</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>نعم، جميع المواد التعليمية والفيديوهات متاحة 24/7. يمكنك الدراسة في أي وقت يناسبك، سواء كان ذلك في الصباح الباكر أو متأخرًا في الليل.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h4>كيف يمكنني التواصل مع الأساتذة؟</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>يمكنك التواصل مع الأساتذة من خلال نظام الرسائل الداخلي في المنصة، أو خلال ساعات العمل المخصصة التي يعلن عنها كل أستاذ. كما يمكنك المشاركة في جلسات الأسئلة والأجوبة الأسبوعية.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h4>هل هناك شهادات بعد إكمال الدورات؟</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>نعم، تحصل على شهادة إكمال لكل مادة تدرسها بنجاح. هذه الشهادات معتمدة من المنصة ويمكنك استخدامها في سيرتك الذاتية.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h4>ما هي طرق الدفع المتاحة؟</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>نقبل الدفع عبر بطاقات الائتمان، التحويل البنكي، والدفع الإلكتروني. جميع المعاملات آمنة ومشفرة لحماية معلوماتك.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="container">
+        <div class="map-section">
+            <h2><i class="fas fa-map-marked-alt"></i> موقعنا</h2>
+            <div class="map-placeholder">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>خريطة الموقع</h3>
+                <p>الجزائر العاصمة - المؤسسة الوطنية للتعليم الطبي</p>
+                <p>الإحداثيات: 36.7783° N, 3.0588° E</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 NUWAHUB. جميع الحقوق محفوظة للمنصة التعليمية الطبية الجزائرية</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item !== answer) {
+                    item.classList.remove('active');
+                    item.previousElementSibling.querySelector('i').style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            // Toggle current FAQ
+            answer.classList.toggle('active');
+            
+            if (answer.classList.contains('active')) {
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+            
+            // Reset form
+            this.reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+        });
+
+        // Form validation
+        document.querySelectorAll('input, select, textarea').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#dc3545';
+                } else {
+                    this.style.borderColor = '#e9ecef';
+                }
+            });
+            
+            field.addEventListener('input', function() {
+                if (this.style.borderColor === 'rgb(220, 53, 69)') {
+                    this.style.borderColor = '#e9ecef';
+                }
+            });
+        });
+
+        // Email validation
+        document.getElementById('email').addEventListener('blur', function() {
+            const email = this.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email && !emailRegex.test(email)) {
+                this.style.borderColor = '#dc3545';
+                this.setCustomValidity('الرجاء إدخال بريد إلكتروني صحيح');
+            } else {
+                this.style.borderColor = '#e9ecef';
+                this.setCustomValidity('');
+            }
+        });
+
+        // Phone validation
+        document.getElementById('phone').addEventListener('blur', function() {
+            const phone = this.value;
+            const phoneRegex = /^[0-9\+\-\s\(\)]+$/;
+            
+            if (phone && !phoneRegex.test(phone)) {
+                this.style.borderColor = '#dc3545';
+            } else {
+                this.style.borderColor = '#e9ecef';
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
+        // Toggle FAQ answers
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const icon = this.querySelector('i');
+
+                document.querySelectorAll('.faq-answer').forEach(item => {
+                    if (item !== answer) {
+                        item.classList.remove('active');
+                    }
+                });
+
+                answer.classList.toggle('active');
+                icon.style.transform = answer.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+        });
+
+        // Map interaction
+        document.querySelector('.map-placeholder')?.addEventListener('click', function() {
+            alert('سيتم إضافة خريطة تفاعلية قريباً!');
+        });
+
+        // Form field validation
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value.trim();
+                const message = document.getElementById('message').value.trim();
+                
+                if (name && email && subject && message) {
+                    document.querySelector('.success-message').classList.add('show');
+                    form.reset();
+                    
+                    setTimeout(() => {
+                        document.querySelector('.success-message').classList.remove('show');
+                    }, 5000);
+                } else {
+                    alert('الرجاء ملء جميع الحقول المطلوبة');
+                }
+            });
+        }
+
+        // Form field validation on blur
+        const fields = document.querySelectorAll('input, textarea, select');
+        fields.forEach(field => {
+            field.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#dc3545';
+                } else {
+                    this.style.borderColor = '#e9ecef';
+                }
+            });
+            
+            field.addEventListener('input', function() {
+                if (this.style.borderColor === 'rgb(220, 53, 69)') {
+                    this.style.borderColor = '#e9ecef';
+                }
+            });
+        });
+
+        // Email validation
+        document.getElementById('email').addEventListener('blur', function() {
+            const email = this.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email && !emailRegex.test(email)) {
+                this.style.borderColor = '#dc3545';
+                this.setCustomValidity('الرجاء إدخال بريد إلكتروني صحيح');
+            } else {
+                this.style.borderColor = '#e9ecef';
+                this.setCustomValidity('');
+            }
+        });
+
+        // Phone validation
+        document.getElementById('phone').addEventListener('blur', function() {
+            const phone = this.value;
+            const phoneRegex = /^[0-9\+\-\s\(\)]+$/;
+            
+            if (phone && !phoneRegex.test(phone)) {
+                this.style.borderColor = '#dc3545';
+            } else {
+                this.style.borderColor = '#e9ecef';
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animate contact items on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply animation to contact items
+        document.querySelectorAll('.contact-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-20px)';
+            item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السنة الثانية - NUWAHUB</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1a73e8;
+            --turquoise: #00acc1;
+            --dark-blue: #0d47a1;
+            --light-blue: #e3f2fd;
+            --white: #ffffff;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-600: #6c757d;
+            --gray-800: #343a40;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        @font-face {
+            font-family: 'Arabic';
+            src: url('Arabic.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            letter-spacing: 0.3px;
+            color: var(--gray-800);
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-size: 16px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+            color: var(--dark-blue);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+
+        button {
+            font-family: 'Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-800);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-top: 80px;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--primary-blue), var(--turquoise));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Integrated Units */
+        .units-section {
+            padding: 4rem 0;
+        }
+
+        .unit-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+            transition: var(--transition);
+        }
+
+        .unit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .unit-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--turquoise));
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .unit-header i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .unit-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .unit-content {
+            padding: 2rem;
+        }
+
+        .sub-units-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sub-unit-card {
+            background: var(--gray-100);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .sub-unit-card:hover {
+            background: var(--light-blue);
+            transform: translateY(-3px);
+        }
+
+        .sub-unit-card h4 {
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sub-unit-card p {
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .topics-list {
+            list-style: none;
+        }
+
+        .topics-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray-700);
+        }
+
+        .topics-list li i {
+            color: var(--turquoise);
+            font-size: 0.8rem;
+        }
+
+        .study-tips {
+            background: var(--light-blue);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .study-tips h3 {
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-card {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 10px;
+            border-right: 4px solid var(--turquoise);
+        }
+
+        .tip-card h5 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .pdf-download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            margin-top: 1rem;
+            margin-right: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .pdf-download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+            background: linear-gradient(135deg, #20c997, #17a2b8);
+        }
+
+        .pdf-download-btn i {
+            margin-left: 0.5rem;
+        }
+
+        .video-section {
+            background: var(--white);
+            border: 2px dashed var(--turquoise);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .video-section:hover {
+            background: var(--turquoise);
+            color: var(--white);
+        }
+
+        .video-section i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-800);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(227, 242, 253, 0.95) 100%);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                width: 100%;
+                text-align: right;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                z-index: 999;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+
+            .nav-links.active {
+                display: flex;
+                max-height: 600px;
+            }
+
+            .nav-links li {
+                padding: 1.2rem 1.5rem;
+                border-bottom: 1px solid rgba(26, 115, 232, 0.1);
+                opacity: 0;
+                animation: slideInMenu 0.4s ease forwards;
+            }
+
+            .nav-links li:nth-child(1) { animation-delay: 0.05s; }
+            .nav-links li:nth-child(2) { animation-delay: 0.1s; }
+            .nav-links li:nth-child(3) { animation-delay: 0.15s; }
+            .nav-links li:nth-child(4) { animation-delay: 0.2s; }
+            .nav-links li:nth-child(5) { animation-delay: 0.25s; }
+            .nav-links li:nth-child(6) { animation-delay: 0.3s; }
+            .nav-links li:nth-child(7) { animation-delay: 0.35s; }
+
+            .nav-links a {
+                font-weight: 600;
+                color: var(--dark-blue);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                transition: var(--transition);
+            }
+
+            .nav-links a:hover {
+                color: var(--primary-blue);
+                padding-right: 8px;
+            }
+
+            @keyframes slideInMenu {
+                from {
+                    opacity: 0;
+                    transform: translateX(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 45px;
+                height: 45px;
+                background: linear-gradient(135deg, var(--primary-blue), var(--turquoise));
+                color: var(--white);
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: var(--transition);
+                font-size: 1.3rem;
+            }
+
+            .mobile-menu-toggle:hover {
+                transform: scale(1.1);
+                box-shadow: 0 5px 15px rgba(26, 115, 232, 0.4);
+            }
+
+            .mobile-menu-toggle:active {
+                transform: scale(0.95);
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .sub-units-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="resources/nuwahub-logo.png" alt="NUWAHUB Logo">
+                <span>NUWAHUB</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="first-year.html">السنة الأولى</a></li>
+                <li><a href="second-year.html">السنة الثانية</a></li>
+                <li><a href="third-year.html">السنة الثالثة</a></li>
+                <li><a href="tips.html">نصائح دراسية</a></li>
+                <li><a href="professors.html">الأساتذة</a></li>
+                <li><a href="contact.html">تواصل معنا</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-heartbeat"></i> السنة الثانية</h1>
+            <p>الوحدات المتكاملة - فهم متكامل لأجهزة الجسم الكبرى</p>
+        </div>
+    </section>
+
+    <!-- Units Section -->
+    <section class="units-section">
+        <div class="container">
+            
+            <!-- Cardiovascular & Respiratory Unit -->
+            <div class="unit-card">
+                <div class="unit-header">
+                    <i class="fas fa-heart"></i>
+                    <h2>الجهاز القلبي التنفسي ودورة الدم</h2>
+                    <p>Cardiovascular & Respiratory System</p>
+                </div>
+                <div class="unit-content">
+                    <p style="color: var(--gray-600); font-size: 1.1rem; text-align: center; margin-bottom: 2rem;">
+                        يتناول هذا الجهاز دراسة متكاملة للقلب، الأوعية الدموية، والجهاز التنفسي، مع التركيز على التشريح، الوظيفة، والتنظيم العصبي.
+                    </p>
+                    
+                    <div style="text-align: center;">
+                        <button class="pdf-download-btn" onclick="downloadPDF('Cardiovascular & Respiratory')">
+                            <i class="fas fa-download"></i> تحميل ملخص الجهاز PDF
+                        </button>
+                    </div>
+                    
+                    <div class="sub-units-grid">
+                        <div class="sub-unit-card">
+                            <h4><i class="fas fa-heart"></i> القلب والدورة الدموية</h4>
+                            <p>تشريح القلب، الدورة الدموية الكبرى والصغرى، تنظيم ضربات القلب</p>
+                            <ul class="topics-list">
+                                <li><i class="fas fa-circle"></i> بنية القلب الأربع حجرات</li>
+                                <li><i class="fas fa-circle"></i> الأوعية الدموية الرئيسية</li>
+                                <li><i class="fas fa-circle"></i> التخطيط الكهربائي للقلب</li>
+                                <li><i class="fas fa-circle"></i> ضغط الدم وتنظيمه</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="sub-unit-card">
+                            <h4><i class="fas fa-lungs"></i> الجهاز التنفسي</h4>
+                            <p>تشريح الرئتين، تبادل الغازات، تنظيم التنفس</p>
+                            <ul class="topics-list">
+                                <li><i class="fas fa-circle"></i> بنية الرئتين والحويصلات</li>
+                                <li><i class="fas fa-circle"></i> ميكانيكا التنفس</li>
+                                <li><i class="fas fa-circle"></i> تبادل الغازات والنقل</li>
+                                <li><i class="fas fa-circle"></i> تنظيم مركز التنفس</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="study-tips">
+                        <h3><i class="fas fa-lightbulb"></i> نصائح للدراسة</h3>
+                        <div class="tips-grid">
+                            <div class="tip-card">
+                                <h5>الفهم التكاملي</h5>
+                                <p>اربط بين تشريح القلب ووظيفته، وفهم العلاقة بين الجهازين القلبي والتنفسي</p>
+                            </div>
+                            <div class="tip-card">
+                                <h5>الرسوم البيانية</h5>
+                                <p>استخدم الرسوم لتوضيح دورات الدم وتدفق الهواء في الرئتين</p>
+                            </div>
+                            <div class="tip-card">
+                                <h5>التطبيق العملي</h5>
+                                <p>راجع صور الأشعة، والتخطيط الكهربائي للقلب، واختبارات وظائف الرئة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="video-section">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>فيديوهات تعليمية</h3>
+                        <p>اضغط هنا لمشاهدة فيديوهات الجهاز القلبي التنفسي</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Digestive & Urinary System -->
+            <div class="unit-card">
+                <div class="unit-header">
+                    <i class="fas fa-stomach"></i>
+                    <h2>الجهاز الهضمي والبولية</h2>
+                    <p>Digestive & Urinary System</p>
+                </div>
+                <div class="unit-content">
+                    <p style="color: var(--gray-600); font-size: 1.1rem; text-align: center; margin-bottom: 2rem;">
+                        دراسة متكاملة للجهاز الهضمي والبولي، مع التركيز على الهضم، الامتصاص، والتخلص من الفضلات.
+                    </p>
+                    
+                    <div style="text-align: center;">
+                        <button class="pdf-download-btn" onclick="downloadPDF('Digestive & Urinary')">
+                            <i class="fas fa-download"></i> تحميل ملخص الجهاز PDF
+                        </button>
+                    </div>
+                    
+                    <div class="sub-units-grid">
+                        <div class="sub-unit-card">
+                            <h4><i class="fas fa-utensils"></i> الجهاز الهضمي</h4>
+                            <p>تشريح الجهاز الهضمي، عمليات الهضم والامتصاص</p>
+                            <ul class="topics-list">
+                                <li><i class="fas fa-circle"></i> الفم، المريء، والمعدة</li>
+                                <li><i class="fas fa-circle"></i> الكبد والمرارة والبنكرياس</li>
+                                <li><i class="fas fa-circle"></i> الأمعاء الدقيقة والغليظة</li>
+                                <li><i class="fas fa-circle"></i> تنظيم إفرازات الجهاز الهضمي</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="sub-unit-card">
+                            <h4><i class="fas fa-tint"></i> الجهاز البولي</h4>
+                            <p>تشريح الكلى، ترشيح الدم، وتكوين البول</p>
+                            <ul class="topics-list">
+                                <li><i class="fas fa-circle"></i> بنية الكلى والنفرون</li>
+                                <li><i class="fas fa-circle"></i> ترشيح الدم وإعادة الامتصاص</li>
+                                <li><i class="fas fa-circle"></i> تنظيم توازن الماء والأملاح</li>
+                                <li><i class="fas fa-circle"></i> الحموضة والقاعدية للدم</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="study-tips">
+                        <h3><i class="fas fa-lightbulb"></i> نصائح للدراسة</h3>
+                        <div class="tips-grid">
+                            <div class="tip-card">
+                                <h5>الفهم الوظيفي</h5>
+                                <p>افهم كيفية عمل الجهازين الهضمي والبولي معاً للحفاظ على توازن الجسم</p>
+                            </div>
+                            <div class="tip-card">
+                                <h5>الجداول الزمنية</h5>
+                                <p>ارسم جداول زمنية لعمليات الهضم والامتصاص</p>
+                            </div>
+                            <div class="tip-card">
+                                <h5>الحالات السريرية</h5>
+                                <p>دراسة الحالات المرضية الشائعة في الجهازين الهضمي والبولي</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="video-section">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>فيديوهات تعليمية</h3>
+                        <p>اضغط هنا لمشاهدة فيديوهات الجهاز الهضمي والبولي</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Endocrine & Reproductive System -->
+            <div class="unit-card">
+                <div class="unit-header">
+                    <i class="fas fa-dna"></i>
+                    <h2>الجهاز الغدد الصماء والتناسلي</h2>
+                    <p>Endocrine & Reproductive System</p>
+                </div>
+                <div class="unit-content">
+                    <p style="color: var(--gray-600); font-size: 1.1rem; text-align: center; margin-bottom: 2rem;">
+                        دراسة الغدد الصماء، الهرمونات، والجهاز التناسلي مع التركيز على التنظيم الهرموني والتكاثر.
+                    </p>
+                    
+                    <div style="text-align: center;">
+                        <button class="pdf-download-btn" onclick="downloadPDF('Endocrine & Reproductive')">
+                            <i class="fas fa-download"></i> تحميل ملخص الجهاز PDF
+                        </button>
+                    </div>
+                    
+                    <div class="sub-units-grid">
+                        <div class="sub-unit-card">
+                            <h4><i class="fas fa-brain"></i> الغدد الصماء</h4>
+                            <p>الغدد الهرمونية، تنظيم الهرمونات، والتوازن الهرموني</p>
+                            <ul class="topics-list">
+                                <li><i class="fas fa-circle"></i> الغدة النخامية والهيبوتالاموس</li>
+                                <li><i class="fas fa-circle"></i> الدرقية والجارات الدرقية</li>
+                                <li><i class="fas a-circle"></i> الكظرية والبنكرياس</li>
+                                <li><i class="fas fa-circle"></i> تنظيم السكر في الدم</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="sub-unit-card">
+                            <h4><i class="fas fa-venus-mars"></i> الجهاز التناسلي</h4>
+                            <p>تشريح وتكاثر الجهاز التناسلي الذكري والأنثوي</p>
+                            <ul class="topics-list">
+                                <li><i class="fas fa-circle"></i> تشريف الجهاز التناسلي</li>
+                                <li><i class="fas fa-circle"></i> الدورة الشهرية والإباضة</li>
+                                <li><i class="fas fa-circle"></i> تكوين الحيوانات المنوية</li>
+                                <li><i class="fas fa-circle"></i> الحمل وتطور الجنين</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="study-tips">
+                        <h3><i class="fas fa-lightbulb"></i> نصائح للدراسة</h3>
+                        <div class="tips-grid">
+                            <div class="tip-card">
+                                <h5>الشبكات الهرمونية</h5>
+                                <p>ارسم شبكات التنظيم الهرموني بين الغدد المختلفة</p>
+                            </div>
+                            <div class="tip-card">
+                                <h5>التغذية الراجعة</h5>
+                                <p>افهم آليات التغذية الراجعة السلبية والإيجابية</p>
+                            </div>
+                            <div class="tip-card">
+                                <h5>التكامل الوظيفي</h5>
+                                <p>ادرس العلاقة بين الجهازين الصماوي والتناسلي</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="video-section">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>فيديوهات تعليمية</h3>
+                        <p>اضغط هنا لمشاهدة فيديوهات الجهاز الصماوي والتناسلي</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nervous System & Senses -->
+            <div class="unit-card">
+                <div class="unit-header">
+                    <i class="fas fa-brain"></i>
+                    <h2>النظام العصبي والحواس</h2>
+                    <p>Nervous System & Senses</p>
+                </div>
+                <div class="unit-content">
+                    <p style="color: var(--gray-600); font-size: 1.1rem; text-align: center; margin-bottom: 2rem;">
+                        دراسة متكاملة للجهاز العصبي المركزي والطرفي، مع التركيز على الحواس والتنظيم العصبي.
+                    </p>
+                    
+                    <div style="text-align: center;">
+                        <button class="pdf-download-btn" onclick="downloadPDF('Nervous System & Senses')">
+                            <i class="fas fa-download"></i> تحميل ملخص الجهاز PDF
+                        </button>
+                    </div>
+                    
+                    <div class="sub-units-grid">
+                        <div class="sub-unit-card">
+                            <h4><i class="fas fa-brain"></i> الجهاز العصبي المركزي</h4>
+                            <p>الدماغ، النخاع الشوكي، والتنظيم العصبي</p>
+                            <ul class="topics-list">
+                                <li><i class="fas fa-circle"></i> تشريح الدماغ والنخاع الشوكي</li>
+                                <li><i class="fas fa-circle"></i> المسارات العصبية</li>
+                                <li><i class="fas fa-circle"></i> النواقل العصبية</li>
+                                <li><i class="fas fa-circle"></i> تنظيم الحركة والإحساس</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="sub-unit-card">
+                            <h4><i class="fas fa-eye"></i> الحواس الخاصة</h4>
+                            <p>النظر، السمع، الشم، التذوق، واللمس</p>
+                            <ul class="topics-list">
+                                <li><i class="fas fa-circle"></i> بنية العين والشبكية</li>
+                                <li><i class="fas fa-circle"></i> الأذن والقوقعة</li>
+                                <li><i class="fas fa-circle"></i> مستقبلات الشم والتذوق</li>
+                                <li><i class="fas fa-circle"></i> تنظيم الحواس</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="study-tips">
+                        <h3><i class="fas fa-lightbulb"></i> نصائح للدراسة</h3>
+                        <div class="tips-grid">
+                            <div class="tip-card">
+                                <h5>الخرائط الدماغية</h5>
+                                <p>استخدم الخرائط لتوضيح مناطق الدماغ المختلفة ووظائفها</p>
+                            </div>
+                            <div class="tip-card">
+                                <h5>المسارات العصبية</h5>
+                                <p>ارسم المسارات الحسية والحركية</p>
+                            </div>
+                            <div class="tip-card">
+                                <h5>التجارب السريرية</h5>
+                                <p>ادرس الحالات العصبية الشائعة وفحوصاتها</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="video-section">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>فيديوهات تعليمية</h3>
+                        <p>اضغط هنا لمشاهدة فيديوهات الجهاز العصبي والحواس</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integrated Units -->
+            <div class="unit-card">
+                <div class="unit-header">
+                    <i class="fas fa-shield-virus"></i>
+                    <h2>وحدات تكاملية مساعدة</h2>
+                    <p>Integrated Support Units</p>
+                </div>
+                <div class="unit-content">
+                    <p style="color: var(--gray-600); font-size: 1.1rem; text-align: center; margin-bottom: 2rem;">
+                        وحدات متخصصة تدعم الفهم المتكامل للأنظمة الطبية.
+                    </p>
+                    
+                    <div class="sub-units-grid">
+                        <div class="sub-unit-card">
+                            <h4><i class="fas fa-dna"></i> علم الوراثة</h4>
+                            <p>الجينات، الوراثة، والتشوهات الوراثية</p>
+                            <ul class="topics-list">
+                                <li><i class="fas fa-circle"></i> القوانين الوراثية</li>
+                                <li><i class="fas fa-circle"></i> الطفرات والتشوهات</li>
+                                <li><i class="fas fa-circle"></i> الاستشارات الوراثية</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="sub-unit-card">
+                            <h4><i class="fas fa-shield-alt"></i> المناعة</h4>
+                            <p>الجهاز المناعي، الأجسام المضادة، والأمراض المناعية</p>
+                            <ul class="topics-list">
+                                <li><i class="fas fa-circle"></i> الخلايا المناعية</li>
+                                <li><i class="fas fa-circle"></i> الأجسام المضادة</li>
+                                <li><i class="fas fa-circle"></i> فرط الحساسية</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="video-section">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>فيديوهات تعليمية</h3>
+                        <p>اضغط هنا لمشاهدة فيديوهات الوحدات التكاملية</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 NUWAHUB. جميع الحقوق محفوظة للمنصة التعليمية الطبية الجزائرية</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
+        // PDF Download Function
+        function downloadPDF(subject) {
+            alert(`سيتم قريباً تحميل ملخص ${subject} بصيغة PDF`);
+            // You can replace this with actual download functionality
+            // Example: window.location.href = `resources/pdfs/${subject}.pdf`;
+        }
+
+        // Video section interaction
+        document.querySelectorAll('.video-section').forEach(section => {
+            section.addEventListener('click', function() {
+                alert('سيتم فتح فيديوهات تعليمية قريباً!');
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

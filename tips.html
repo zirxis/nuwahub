@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نصائح دراسية - NUWAHUB</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1a73e8;
+            --turquoise: #00acc1;
+            --dark-blue: #0d47a1;
+            --light-blue: #e3f2fd;
+            --white: #ffffff;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-600: #6c757d;
+            --gray-800: #343a40;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        @font-face {
+            font-family: 'Arabic';
+            src: url('Arabic.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            letter-spacing: 0.3px;
+            color: var(--gray-800);
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-size: 16px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+            color: var(--dark-blue);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+
+        button {
+            font-family: 'Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-800);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-top: 80px;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--primary-blue), var(--turquoise));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Tips Section */
+        .tips-section {
+            padding: 4rem 0;
+        }
+
+        .tips-category {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+            transition: var(--transition);
+        }
+
+        .tips-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--turquoise));
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .category-header i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-content {
+            padding: 2rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tip-card {
+            background: var(--gray-100);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            border-right: 4px solid var(--turquoise);
+        }
+
+        .tip-card:hover {
+            background: var(--light-blue);
+            transform: translateY(-3px);
+        }
+
+        .tip-card h4 {
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tip-card p {
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .tip-list {
+            list-style: none;
+        }
+
+        .tip-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray-700);
+        }
+
+        .tip-list li i {
+            color: var(--turquoise);
+        }
+
+        .strategy-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .strategy-card h3 {
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .technique-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .technique-item {
+            background: var(--light-blue);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .technique-item:hover {
+            background: var(--turquoise);
+            color: var(--white);
+        }
+
+        .technique-item i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .technique-item h4 {
+            color: var(--dark-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .technique-item p {
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        .technique-item:hover p {
+            color: var(--white);
+        }
+
+        .timeline {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline h3 {
+            color: var(--dark-blue);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 20px;
+            top: 50px;
+            width: 2px;
+            height: 50px;
+            background: var(--turquoise);
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--turquoise);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            margin-left: 1rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-content h4 {
+            color: var(--dark-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        .motivation-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--turquoise));
+            color: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .motivation-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .motivation-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-right: 4px solid var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-800);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(227, 242, 253, 0.95) 100%);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                width: 100%;
+                text-align: right;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                z-index: 999;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+
+            .nav-links.active {
+                display: flex;
+                max-height: 600px;
+            }
+
+            .nav-links li {
+                padding: 1.2rem 1.5rem;
+                border-bottom: 1px solid rgba(26, 115, 232, 0.1);
+                opacity: 0;
+                animation: slideInMenu 0.4s ease forwards;
+            }
+
+            .nav-links li:nth-child(1) { animation-delay: 0.05s; }
+            .nav-links li:nth-child(2) { animation-delay: 0.1s; }
+            .nav-links li:nth-child(3) { animation-delay: 0.15s; }
+            .nav-links li:nth-child(4) { animation-delay: 0.2s; }
+            .nav-links li:nth-child(5) { animation-delay: 0.25s; }
+            .nav-links li:nth-child(6) { animation-delay: 0.3s; }
+            .nav-links li:nth-child(7) { animation-delay: 0.35s; }
+
+            .nav-links a {
+                font-weight: 600;
+                color: var(--dark-blue);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                transition: var(--transition);
+            }
+
+            .nav-links a:hover {
+                color: var(--primary-blue);
+                padding-right: 8px;
+            }
+
+            @keyframes slideInMenu {
+                from {
+                    opacity: 0;
+                    transform: translateX(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 45px;
+                height: 45px;
+                background: linear-gradient(135deg, var(--primary-blue), var(--turquoise));
+                color: var(--white);
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: var(--transition);
+                font-size: 1.3rem;
+            }
+
+            .mobile-menu-toggle:hover {
+                transform: scale(1.1);
+                box-shadow: 0 5px 15px rgba(26, 115, 232, 0.4);
+            }
+
+            .mobile-menu-toggle:active {
+                transform: scale(0.95);
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .technique-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .timeline-icon {
+                margin-left: 0;
+                margin-bottom: 1rem;
+            }
+
+            .timeline-item::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="resources/nuwahub-logo.png" alt="NUWAHUB Logo">
+                <span>NUWAHUB</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="first-year.html">السنة الأولى</a></li>
+                <li><a href="second-year.html">السنة الثانية</a></li>
+                <li><a href="third-year.html">السنة الثالثة</a></li>
+                <li><a href="tips.html">نصائح دراسية</a></li>
+                <li><a href="professors.html">الأساتذة</a></li>
+                <li><a href="contact.html">تواصل معنا</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-lightbulb"></i> نصائح دراسية</h1>
+            <p>استراتيجيات ذكية لتحقيق النجاح في دراستك الطبية</p>
+        </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section class="tips-section">
+        <div class="container">
+            
+            <!-- Study Planning -->
+            <div class="tips-category">
+                <div class="category-header">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h2>التخطيط الدراسي</h2>
+                    <p>Planning Your Medical Study Journey</p>
+                </div>
+                <div class="category-content">
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4><i class="fas fa-clock"></i> إدارة الوقت</h4>
+                            <p>الوقت هو أثمن مورد لديك كطالب طب. تعلم إدارته بفعالية:</p>
+                            <ul class="tip-list">
+                                <li><i class="fas fa-check-circle"></i> حدد أولوياتك اليومية</li>
+                                <li><i class="fas fa-check-circle"></i> استخدم تقنية Pomodoro للتركيز</li>
+                                <li><i class="fas fa-check-circle"></i> خصص وقتًا للمراجعة اليومية</li>
+                                <li><i class="fas fa-check-circle"></i> تجنب التأجيل والمماطلة</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <h4><i class="fas fa-list-check"></i> وضع الأهداف</h4>
+                            <p>أهداف واضحة وقابلة للقياس تساعدك على التقدم المستمر:</p>
+                            <ul class="tip-list">
+                                <li><i class="fas fa-check-circle"></i> حدد أهدافًا قصيرة وطويلة المدى</li>
+                                <li><i class="fas fa-check-circle"></i> اجعل أهدافك SMART</li>
+                                <li><i class="fas fa-check-circle"></i> راجع تقدمك أسبوعيًا</li>
+                                <li><i class="fas fa-check-circle"></i> كافئ نفسك على الإنجازات</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <h4><i class="fas fa-chart-line"></i> المتابعة والتقييم</h4>
+                            <p>تابع تقدمك باستمرار وقيّم أداءك:</p>
+                            <ul class="tip-list">
+                                <li><i class="fas fa-check-circle"></i> احتفظ بسجل يومي للدراسة</li>
+                                <li><i class="fas fa-check-circle"></i> اختبر نفسك بانتظام</li>
+                                <li><i class="fas fa-check-circle"></i> حلل نقاط ضعفك وقواك</li>
+                                <li><i class="fas fa-check-circle"></i> عدّل استراتيجيتك حسب الحاجة</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Memory Techniques -->
+            <div class="tips-category">
+                <div class="category-header">
+                    <i class="fas fa-brain"></i>
+                    <h2>تقنيات الحفظ والتذكر</h2>
+                    <p>Memory Techniques for Medical Students</p>
+                </div>
+                <div class="category-content">
+                    <div class="strategy-card">
+                        <h3><i class="fas fa-puzzle-piece"></i> استراتيجيات الحفظ الفعّال</h3>
+                        <p>الطب يتطلب حفظ كمية هائلة من المعلومات. استخدم هذه التقنيات:</p>
+                        
+                        <div class="technique-grid">
+                            <div class="technique-item">
+                                <i class="fas fa-link"></i>
+                                <h4>الربط المعنوي</h4>
+                                <p>اربط المعلومات الجديدة بمعلومات موجودة لديك</p>
+                            </div>
+                            <div class="technique-item">
+                                <i class="fas fa-image"></i>
+                                <h4>التصور الذهني</h4>
+                                <p>صور المعلومات في ذهنك كصور أو مشاهد حية</p>
+                            </div>
+                            <div class="technique-item">
+                                <i class="fas fa-music"></i>
+                                <h4>الحفظ بالصوت</h4>
+                                <p>سجل المعلومات واستمع إليها باستمرار</p>
+                            </div>
+                            <div class="technique-item">
+                                <i class="fas fa-repeat"></i>
+                                <h4>التكرار المتباعد</h4>
+                                <p>راجع المعلومات على فترات متباعدة للحفظ طويل الأمد</p>
+                            </div>
+                            <div class="technique-item">
+                                <i class="fas fa-map"></i>
+                                <h4>قصر الذاكرة</h4>
+                                <p>استخدم أماكن مألوفة لتخزين المعلومات</p>
+                            </div>
+                            <div class="technique-item">
+                                <i class="fas fa-drum"></i>
+                                <h4>الاختزال</h4>
+                                <p>اختصر المعلومات الطويلة في كلمات مفتاحية</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Study Methods -->
+            <div class="tips-category">
+                <div class="category-header">
+                    <i class="fas fa-book-open"></i>
+                    <h2>طرق الدراسة الفعّالة</h2>
+                    <p>Effective Study Methods</p>
+                </div>
+                <div class="category-content">
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4><i class="fas fa-users"></i> الدراسة الجماعية</h4>
+                            <p>الدراسة مع الزملاء تفيد في فهم أعمق:</p>
+                            <ul class="tip-list">
+                                <li><i class="fas fa-check-circle"></i> شارك في مجموعات دراسية منظمة</li>
+                                <li><i class="fas fa-check-circle"></i> علّم زملاءك ما تعلمته</li>
+                                <li><i class="fas fa-check-circle"></i> ناقش الحالات السريرية</li>
+                                <li><i class="fas fa-check-circle"></i> شارك في المسابقات الطبية</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <h4><i class="fas fa-pen"></i> الملاحظات الفعّالة</h4>
+                            <p>تقنيات كتابة ملاحظات تسهل المراجعة:</p>
+                            <ul class="tip-list">
+                                <li><i class="fas fa-check-circle"></i> استخدم طريقة Cornell للملاحظات</li>
+                                <li><i class="fas fa-check-circle"></i> رسم الخرائط الذهنية</li>
+                                <li><i class="fas fa-check-circle"></i> أضف رسومات توضيحية</li>
+                                <li><i class="fas fa-check-circle"></i> راجع ملاحظاتك يوميًا</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <h4><i class="fas fa-laptop"></i> التعلم النشط</h4>
+                            <p>تفاعل مع المادة الدراسية بشكل نشط:</p>
+                            <ul class="tip-list">
+                                <li><i class="fas fa-check-circle"></i> اطرح الأسئلة أثناء الدراسة</li>
+                                <li><i class="fas fa-check-circle"></i> حل المسائل والتمارين</li>
+                                <li><i class="fas fa-check-circle"></i> ربط المعلومات بمواقف سريرية</li>
+                                <li><i class="fas fa-check-circle"></i> استخدم التطبيقات التفاعلية</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exam Preparation -->
+            <div class="tips-category">
+                <div class="category-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h2>الاستعداد للامتحانات</h2>
+                    <p>Exam Preparation Strategies</p>
+                </div>
+                <div class="category-content">
+                    <div class="timeline">
+                        <h3><i class="fas fa-calendar-alt"></i> جدول الاستعداد للامتحانات</h3>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-1"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>4-6 أسابيع قبل الامتحان</h4>
+                                <p>ابدأ المراجعة المبكرة، راجع الملاحظات، ابدأ بحل الأسئلة السابقة</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-2"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>2-3 أسابيع قبل الامتحان</h4>
+                                <p>كثف المراجعة، حل المزيد من الأسئلة، ركز على النقاط الضعيفة</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-3"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>1 أسبوع قبل الامتحان</h4>
+                                <p>مراجعة نهائية، حل امتحانات تجريبية، رتب أوراقك</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-4"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>يوم الامتحان</h4>
+                                <p>نم جيدًا، تناول إفطارًا صحيًا، وصل مبكرًا، كن هادئًا</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="strategy-card">
+                        <h3><i class="fas fa-lightbulb"></i> نصائح يوم الامتحان</h3>
+                        <div class="tips-grid">
+                            <div class="tip-card">
+                                <h4><i class="fas fa-brain"></i> التركيز الذهني</h4>
+                                <ul class="tip-list">
+                                    <li><i class="fas fa-check-circle"></i> اقرأ الأسئلة بعناية</li>
+                                    <li><i class="fas fa-check-circle"></i> ابدأ بالأسئلة السهلة</li>
+                                    <li><i class="fas fa-check-circle"></i> ادّع الوقت بذكاء</li>
+                                    <li><i class="fas fa-check-circle"></i> راجع إجاباتك</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="tip-card">
+                                <h4><i class="fas fa-heart"></i> الرعاية الذاتية</h4>
+                                <ul class="tip-list">
+                                    <li><i class="fas fa-check-circle"></i> نم 7-8 ساعات قبل الامتحان</li>
+                                    <li><i class="fas fa-check-circle"></i> تناول وجبة خفيفة صحية</li>
+                                    <li><i class="fas fa-check-circle"></i> تجنع الكافيين المفرط</li>
+                                    <li><i class="fas fa-check-circle"></i> خذ نفسًا عميقًا للاسترخاء</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Motivation & Success -->
+            <div class="motivation-section">
+                <h2><i class="fas fa-star"></i> نحو النجاح الطبي</h2>
+                <p>
+                    رحلتك الطبية مليئة بالتحديات، لكن كل تحدي هو فرصة للنمو والتعلم. تذكر أنك في هذا المجال 
+                    لمساعدة الآخرين وتغيير حياتهم للأفضل.
+                </p>
+                
+                <div class="quote">
+                    "الطب ليس مجرد مهنة، إنه رسالة خدمة الإنسانية. كل ساعة دراسة تقضيها اليوم 
+                    ستعود بالفائدة على مريض غداً."
+                </div>
+                
+                <div class="tips-grid" style="margin-top: 2rem;">
+                    <div class="tip-card" style="background: rgba(255, 255, 255, 0.1); border: none;">
+                        <h4 style="color: white;"><i class="fas fa-fire"></i> الحفاظ على الحافز</h4>
+                        <ul class="tip-list">
+                            <li><i class="fas fa-check-circle"></i> تذكر هدفك النهائي دائمًا</li>
+                            <li><i class="fas fa-check-circle"></i> احتفل بالإنجازات الصغيرة</li>
+                            <li><i class="fas fa-check-circle"></i> ابتعد عن الطاقة السلبية</li>
+                            <li><i class="fas fa-check-circle"></i> راجع أسباب اختيارك للطب</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card" style="background: rgba(255, 255, 255, 0.1); border: none;">
+                        <h4 style="color: white;"><i class="fas fa-balance-scale"></i> التوازن الحياتي</h4>
+                        <ul class="tip-list">
+                            <li><i class="fas fa-check-circle"></i> خصص وقتًا للراحة والترفيه</li>
+                            <li><i class="fas fa-check-circle"></i> مارس الرياضة بانتظام</li>
+                            <li><i class="fas fa-check-circle"></i> حافظ على علاقاتك الاجتماعية</li>
+                            <li><i class="fas fa-check-circle"></i> اعتنِ بصحتك النفسية</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 NUWAHUB. جميع الحقوق محفوظة للمنصة التعليمية الطبية الجزائرية</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply animation to cards
+        document.querySelectorAll('.tip-card, .technique-item, .strategy-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Interactive timeline
+        document.querySelectorAll('.timeline-item').forEach((item, index) => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(10px)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+    </script>
+</body>
+</html>
