@@ -36,7 +36,12 @@ function toggleTheme() {
 
 // Update theme toggle button icon
 function updateThemeToggleIcon(icon) {
-    const themeToggle = document.getElementById('themeToggle');
+    // Try both possible IDs
+    let themeToggle = document.getElementById('themeToggle');
+    if (!themeToggle) {
+        themeToggle = document.getElementById('themeBtn');
+    }
+    
     if (themeToggle) {
         const iconElement = themeToggle.querySelector('i');
         if (iconElement) {
@@ -47,7 +52,12 @@ function updateThemeToggleIcon(icon) {
 
 // Setup theme toggle button
 function setupThemeToggle() {
-    const themeToggle = document.getElementById('themeToggle');
+    // Try both possible IDs
+    let themeToggle = document.getElementById('themeToggle');
+    if (!themeToggle) {
+        themeToggle = document.getElementById('themeBtn');
+    }
+    
     if (themeToggle) {
         themeToggle.addEventListener('click', toggleTheme);
     }
