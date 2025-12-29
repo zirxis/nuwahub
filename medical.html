@@ -1761,15 +1761,15 @@
             themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             localStorage.setItem('medical-theme', newTheme);
             
-            // Update particles color
-            particlesJS("particles-js", {
-                particles: {
-                    color: { value: newTheme === 'dark' ? "#60a5fa" : "#2b6cb0" },
-                    line_linked: {
-                        color: newTheme === 'dark' ? "#60a5fa" : "#2b6cb0"
-                    }
+            // Update particles color only without reinitializing
+            if (window.pJS) {
+                const particleColor = newTheme === 'dark' ? "#60a5fa" : "#2b6cb0";
+                window.pJS.particles.color.value = particleColor;
+                if (window.pJS.particles.line_linked) {
+                    window.pJS.particles.line_linked.color = particleColor;
                 }
-            });
+                window.pJS.fn.particlesRefresh();
+            }
         });
 
         // Navigation Scroll Effect
