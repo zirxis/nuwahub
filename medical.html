@@ -1,0 +1,2464 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUWAHUB | الإنجليزية الطبية المتقدمة</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+
+    <style>
+        :root {
+            /* Light Mode - Medical Theme */
+            --bg: #f0f7ff;
+            --surface: rgba(255, 255, 255, 0.95);
+            --text-main: #1a365d;
+            --text-sec: #4a5568;
+            --primary: #2b6cb0;
+            --primary-light: #4299e1;
+            --primary-glow: rgba(43, 108, 176, 0.15);
+            --accent: #00b5d8;
+            --accent-light: #76e4f7;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+            --border: rgba(66, 153, 225, 0.2);
+            --card-shadow: 0 12px 48px -12px rgba(43, 108, 176, 0.12);
+            --gradient-text: linear-gradient(135deg, #2b6cb0 0%, #00b5d8 100%);
+            --gradient-bg: linear-gradient(135deg, #ebf8ff 0%, #f0fff4 100%);
+            --glass-effect: rgba(255, 255, 255, 0.85);
+            --blur: blur(20px);
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --surface: rgba(30, 41, 59, 0.85);
+            --text-main: #e2e8f0;
+            --text-sec: #94a3b8;
+            --primary: #60a5fa;
+            --primary-light: #93c5fd;
+            --primary-glow: rgba(96, 165, 250, 0.2);
+            --accent: #22d3ee;
+            --accent-light: #67e8f9;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --border: rgba(100, 116, 139, 0.3);
+            --card-shadow: 0 12px 48px -12px rgba(0, 0, 0, 0.4);
+            --gradient-text: linear-gradient(135deg, #60a5fa 0%, #22d3ee 100%);
+            --gradient-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --glass-effect: rgba(15, 23, 42, 0.9);
+            --blur: blur(20px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: var(--gradient-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.7;
+            letter-spacing: 0.3px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-size: 16px;
+            min-height: 100vh;
+        }
+
+        /* Animated Background Particles */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* Navigation */
+        .medical-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--glass-effect);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 15px 40px;
+            transform: translateY(0);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .medical-nav.hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logo {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-text);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        .brand-text {
+            font-size: 1.6rem;
+            font-weight: 900;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-main {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--primary-glow);
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: var(--surface);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .user-profile:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-text);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .theme-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: white;
+            transform: rotate(15deg);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-main);
+        }
+
+        /* Hero Section */
+        .medical-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary-glow);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 5vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 150px;
+            height: 4px;
+            background: var(--gradient-text);
+            border-radius: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-sec);
+            margin-bottom: 40px;
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            min-width: 140px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-sec);
+            text-align: center;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-text);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px var(--primary-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px var(--primary-glow);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-main);
+            border: 2px solid var(--primary);
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+            z-index: 1;
+        }
+
+        .floating-cards {
+            position: relative;
+            width: 100%;
+            height: 500px;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .floating-card:nth-child(1) {
+            top: 0;
+            right: 0;
+            width: 300px;
+            animation: float-1 6s ease-in-out infinite;
+        }
+
+        .floating-card:nth-child(2) {
+            bottom: 50px;
+            left: 0;
+            width: 280px;
+            animation: float-2 7s ease-in-out infinite 0.5s;
+        }
+
+        .floating-card:nth-child(3) {
+            top: 200px;
+            left: 100px;
+            width: 250px;
+            animation: float-3 5s ease-in-out infinite 1s;
+        }
+
+        @keyframes float-1 {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        @keyframes float-2 {
+            0%, 100% { transform: translateY(0) rotate(2deg); }
+            50% { transform: translateY(-15px) rotate(-2deg); }
+        }
+
+        @keyframes float-3 {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-25px) rotate(1deg); }
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-text);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-sec);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Learning Path */
+        .learning-path {
+            margin-bottom: 120px;
+        }
+
+        .path-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .path-card {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .path-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-text);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+
+        .path-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .path-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .path-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-glow);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: var(--primary);
+            transition: all 0.4s ease;
+        }
+
+        .path-card:hover .path-icon {
+            background: var(--gradient-text);
+            color: white;
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .path-level {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .path-progress {
+            width: 100%;
+            height: 8px;
+            background: var(--bg);
+            border-radius: 4px;
+            margin: 25px 0;
+            overflow: hidden;
+        }
+
+        .path-progress-bar {
+            height: 100%;
+            background: var(--gradient-text);
+            border-radius: 4px;
+            width: 0;
+            transition: width 1s ease;
+        }
+
+        /* Interactive Quiz */
+        .interactive-quiz {
+            margin-bottom: 120px;
+        }
+
+        .quiz-container {
+            background: var(--surface);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .quiz-header {
+            padding: 30px 40px;
+            background: var(--primary-glow);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quiz-info {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .quiz-timer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .quiz-body {
+            padding: 40px;
+        }
+
+        .quiz-question {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            color: var(--text-main);
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .quiz-option {
+            background: var(--bg);
+            border: 2px solid var(--border);
+            padding: 20px 25px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background: var(--primary-glow);
+        }
+
+        .quiz-option.correct {
+            border-color: var(--success);
+            background: rgba(56, 161, 105, 0.1);
+        }
+
+        .quiz-option.wrong {
+            border-color: var(--danger);
+            background: rgba(229, 62, 62, 0.1);
+        }
+
+        .option-letter {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover .option-letter {
+            background: var(--primary);
+            color: white;
+        }
+
+        .quiz-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .quiz-stats {
+            display: flex;
+            gap: 30px;
+            color: var(--text-sec);
+        }
+
+        /* Medical Dictionary */
+        .medical-dictionary {
+            margin-bottom: 120px;
+        }
+
+        .dictionary-search {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 20px 30px;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sec);
+            font-size: 1.2rem;
+        }
+
+        .dictionary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .term-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .term-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow);
+            border-color: var(--primary);
+        }
+
+        .term-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .term-arabic {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .term-english {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        .term-category {
+            display: inline-block;
+            padding: 6px 15px;
+            background: var(--bg);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .term-example {
+            color: var(--text-sec);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            border-right: 3px solid var(--accent);
+            padding-right: 15px;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .term-pronunciation {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Practice Area */
+        .practice-area {
+            margin-bottom: 120px;
+        }
+
+        .practice-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .practice-tab {
+            padding: 15px 30px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .practice-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .practice-content {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 50px;
+            border: 1px solid var(--border);
+            min-height: 400px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .translation-exercise {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .exercise-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .exercise-text {
+            background: var(--bg);
+            padding: 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            border: 2px dashed var(--border);
+        }
+
+        .answer-input {
+            width: 100%;
+            min-height: 150px;
+            padding: 20px;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+
+        /* Progress Dashboard */
+        .progress-dashboard {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 50px;
+            border: 1px solid var(--border);
+            margin-bottom: 120px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .progress-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .progress-card {
+            background: var(--bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .progress-circle {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .circle-bg {
+            fill: none;
+            stroke: var(--bg);
+            stroke-width: 8;
+        }
+
+        .circle-progress {
+            fill: none;
+            stroke: var(--primary);
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 1s ease;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--text-main);
+        }
+
+        /* Footer */
+        .medical-footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 80px 40px 40px;
+            margin-top: 100px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--text-sec);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-sec);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .floating-cards {
+                display: none;
+            }
+            
+            .hero-actions {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .medical-nav {
+                padding: 15px 20px;
+            }
+            
+            .main-content {
+                padding: 60px 20px;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .stat-item {
+                min-width: 120px;
+                padding: 15px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .path-container,
+            .dictionary-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .practice-content {
+                padding: 30px;
+            }
+            
+            .medical-footer {
+                padding: 60px 20px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-stats {
+                gap: 15px;
+            }
+            
+            .stat-item {
+                min-width: 100px;
+                padding: 10px;
+            }
+            
+            .btn-primary,
+            .btn-secondary {
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Utility Classes */
+        .glass-effect {
+            background: var(--glass-effect);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+        }
+
+        .gradient-text {
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav class="medical-nav glass-effect" id="mainNav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="nav-logo">
+                    <i class="fas fa-language"></i>
+                </div>
+                <span class="brand-text">NUWAHUB Medical</span>
+            </div>
+
+            <div class="nav-main">
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="#learning" class="nav-link"><i class="fas fa-graduation-cap"></i> المسار التعليمي</a></li>
+                    <li><a href="#quiz" class="nav-link"><i class="fas fa-brain"></i> التدريبات</a></li>
+                    <li><a href="#dictionary" class="nav-link"><i class="fas fa-book-medical"></i> القاموس</a></li>
+                    <li><a href="#practice" class="nav-link"><i class="fas fa-pen-fancy"></i> التطبيق</a></li>
+                    <li><a href="#progress" class="nav-link"><i class="fas fa-chart-line"></i> التقدم</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <div class="user-profile">
+                        <div class="user-avatar">ط</div>
+                        <div>
+                            <div style="font-weight: 600;">طالب طب</div>
+                            <div style="font-size: 0.8rem; color: var(--text-sec);">450 نقطة</div>
+                        </div>
+                    </div>
+
+                    <button class="theme-toggle" id="themeBtn">
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <div class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="medical-hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    <span>منصة متقدمة للغة الإنجليزية الطبية</span>
+                </div>
+
+                <h1 class="hero-title" id="animatedTitle">اللغة التي <br>تفتح آفاق الطب العالمي</h1>
+                
+                <p class="hero-subtitle">
+                    برنامج متكامل لتعلم الإنجليزية الطبية، مصمم خصيصاً للطلاب والأطباء العرب. 
+                    طور مهاراتك في التواصل الطبي، فهم البحوث الدولية، والمشاركة في المؤتمرات العالمية.
+                </p>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="850">0</div>
+                        <div class="stat-label">مصطلح طبي</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="120">0</div>
+                        <div class="stat-label">درس تفاعلي</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="45">0</div>
+                        <div class="stat-label">حالة سريرية</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="24">0</div>
+                        <div class="stat-label">ساعة فيديو</div>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <button class="btn-primary" onclick="startLearning()">
+                        <i class="fas fa-play-circle"></i>
+                        ابدأ التعلم الآن
+                    </button>
+                    <button class="btn-secondary" onclick="scrollToSection('learning')">
+                        <i class="fas fa-eye"></i>
+                        استعرض المسارات
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="floating-cards">
+                    <div class="floating-card glass-effect">
+                        <div style="text-align: center;">
+                            <i class="fas fa-heartbeat" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+                            <h3 style="margin-bottom: 10px;">مصطلحات التشريح</h3>
+                            <p style="color: var(--text-sec); font-size: 0.9rem;">تعلم أسماء الأعضاء والأجهزة بدقة علمية</p>
+                        </div>
+                    </div>
+                    <div class="floating-card glass-effect">
+                        <div style="text-align: center;">
+                            <i class="fas fa-stethoscope" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+                            <h3 style="margin-bottom: 10px;">التواصل السريري</h3>
+                            <p style="color: var(--text-sec); font-size: 0.9rem;">محادثات مع المرضى وكتابة التقارير</p>
+                        </div>
+                    </div>
+                    <div class="floating-card glass-effect">
+                        <div style="text-align: center;">
+                            <i class="fas fa-microscope" style="font-size: 3rem; color: var(--success); margin-bottom: 20px;"></i>
+                            <h3 style="margin-bottom: 10px;">البحث العلمي</h3>
+                            <p style="color: var(--text-sec); font-size: 0.9rem;">قراءة وكتابة الأوراق البحثية</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Sections -->
+    <div class="main-content">
+        <!-- Learning Path Section -->
+        <section class="learning-path" id="learning">
+            <div class="section-header">
+                <h2 class="section-title gradient-text">المسار التعليمي</h2>
+                <p class="section-subtitle">اختر المستوى المناسب لك وابدأ رحلتك في تعلم الإنجليزية الطبية بخطوات منهجية</p>
+            </div>
+
+            <div class="path-container">
+                <!-- Beginner Level -->
+                <div class="path-card" onclick="selectLevel('beginner')">
+                    <div class="path-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="path-level">
+                        <i class="fas fa-flag"></i>
+                        <span>المستوى المبتدئ</span>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">المتطلب الأساسي</h3>
+                    <p style="color: var(--text-sec); margin-bottom: 20px; line-height: 1.6;">
+                        للمبتدئين وطلاب السنوات الأولى. يركز على المصطلحات الأساسية والتواصل البسيط مع المرضى.
+                    </p>
+                    
+                    <div class="path-progress">
+                        <div class="path-progress-bar" data-width="35"></div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; color: var(--text-sec); font-size: 0.9rem;">
+                        <span>12 درس</span>
+                        <span>35% مكتمل</span>
+                    </div>
+                </div>
+
+                <!-- Intermediate Level -->
+                <div class="path-card" onclick="selectLevel('intermediate')">
+                    <div class="path-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="path-level">
+                        <i class="fas fa-mountain"></i>
+                        <span>المستوى المتوسط</span>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">الاحتراف السريري</h3>
+                    <p style="color: var(--text-sec); margin-bottom: 20px; line-height: 1.6;">
+                        لطلاب السنوات السريرية. مصطلحات الأمراض، الفحوصات، وكتابة التقارير الطبية.
+                    </p>
+                    
+                    <div class="path-progress">
+                        <div class="path-progress-bar" data-width="60"></div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; color: var(--text-sec); font-size: 0.9rem;">
+                        <span>24 درس</span>
+                        <span>60% مكتمل</span>
+                    </div>
+                </div>
+
+                <!-- Advanced Level -->
+                <div class="path-card" onclick="selectLevel('advanced')">
+                    <div class="path-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="path-level">
+                        <i class="fas fa-crown"></i>
+                        <span>المستوى المتقدم</span>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">التميز الأكاديمي</h3>
+                    <p style="color: var(--text-sec); margin-bottom: 20px; line-height: 1.6;">
+                        للأطباء والباحثين. البحث العلمي، المؤتمرات الدولية، والنشر في المجلات العالمية.
+                    </p>
+                    
+                    <div class="path-progress">
+                        <div class="path-progress-bar" data-width="20"></div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; color: var(--text-sec); font-size: 0.9rem;">
+                        <span>36 درس</span>
+                        <span>20% مكتمل</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Quiz Section -->
+        <section class="interactive-quiz" id="quiz">
+            <div class="section-header">
+                <h2 class="section-title gradient-text">التدريبات التفاعلية</h2>
+                <p class="section-subtitle">اختبر معرفتك وطور مهاراتك من خلال تمارين تفاعلية تغطي جميع جوانب اللغة الإنجليزية الطبية</p>
+            </div>
+
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h3 style="font-size: 1.5rem;">اختبار المصطلحات الطبية</h3>
+                    <div class="quiz-info">
+                        <div class="quiz-timer">
+                            <i class="fas fa-clock"></i>
+                            <span id="timer">02:00</span>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <span style="color: var(--success);"><i class="fas fa-check-circle"></i> 8</span>
+                            <span style="color: var(--text-sec);"><i class="fas fa-question-circle"></i> 12</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-body">
+                    <div class="quiz-question" id="currentQuestion">
+                        What is the English term for a medical condition where there's a deficiency of red blood cells or hemoglobin in the blood?
+                    </div>
+
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectQuizOption(this, 'A')">
+                            <div class="option-letter">A</div>
+                            <span>Hypertension</span>
+                        </div>
+                        <div class="quiz-option" onclick="selectQuizOption(this, 'B')">
+                            <div class="option-letter">B</div>
+                            <span>Anemia</span>
+                        </div>
+                        <div class="quiz-option" onclick="selectQuizOption(this, 'C')">
+                            <div class="option-letter">C</div>
+                            <span>Leukemia</span>
+                        </div>
+                        <div class="quiz-option" onclick="selectQuizOption(this, 'D')">
+                            <div class="option-letter">D</div>
+                            <span>Thrombocytopenia</span>
+                        </div>
+                    </div>
+
+                    <div class="quiz-actions">
+                        <button class="btn-secondary" onclick="skipQuestion()">
+                            <i class="fas fa-forward"></i>
+                            تخطي السؤال
+                        </button>
+                        
+                        <div class="quiz-stats">
+                            <span>السؤال <span id="currentQ">2</span> من 10</span>
+                            <span>الإجابات الصحيحة: <span id="correctCount">8</span></span>
+                        </div>
+
+                        <button class="btn-primary" id="submitBtn" onclick="submitAnswer()">
+                            <i class="fas fa-paper-plane"></i>
+                            تأكيد الإجابة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Medical Dictionary Section -->
+        <section class="medical-dictionary" id="dictionary">
+            <div class="section-header">
+                <h2 class="section-title gradient-text">القاموس الطبي المتقدم</h2>
+                <p class="section-subtitle">ابحث عن المصطلحات الطبية وتعرف على معانيها، نطقها، واستخداماتها في السياق الطبي</p>
+            </div>
+
+            <div class="dictionary-search">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="ابحث عن مصطلح طبي..." oninput="searchTerms(this.value)">
+            </div>
+
+            <div class="dictionary-grid" id="termsGrid">
+                <!-- Terms will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Practice Area -->
+        <section class="practice-area" id="practice">
+            <div class="section-header">
+                <h2 class="section-title gradient-text">منطقة التطبيق العملي</h2>
+                <p class="section-subtitle">طبق ما تعلمته من خلال تمارين عملية في الترجمة، المحادثة، والكتابة الطبية</p>
+            </div>
+
+            <div class="practice-tabs">
+                <div class="practice-tab active" onclick="switchPracticeTab('translation')">
+                    <i class="fas fa-language"></i>
+                    الترجمة الطبية
+                </div>
+                <div class="practice-tab" onclick="switchPracticeTab('listening')">
+                    <i class="fas fa-headphones"></i>
+                    الاستماع الطبي
+                </div>
+                <div class="practice-tab" onclick="switchPracticeTab('writing')">
+                    <i class="fas fa-edit"></i>
+                    كتابة التقارير
+                </div>
+                <div class="practice-tab" onclick="switchPracticeTab('conversation')">
+                    <i class="fas fa-comments"></i>
+                    المحادثة السريرية
+                </div>
+            </div>
+
+            <div class="practice-content">
+                <div class="translation-exercise" id="practiceContent">
+                    <div class="exercise-header">
+                        <h3 style="margin-bottom: 10px;">ترجمة الجمل الطبية</h3>
+                        <p style="color: var(--text-sec);">ترجم الجملة التالية من العربية إلى الإنجليزية مع مراعاة الدقة الطبية</p>
+                    </div>
+                    
+                    <div class="exercise-text" id="arabicText">
+                        "يشتكي المريض البالغ من العمر ٤٥ سنة من ألم حاد في الجانب الأيمن العلوي من البطن، مصحوباً بالغثيان والقيء، والذي يزداد سوءاً بعد تناول الوجبات الدسمة."
+                    </div>
+                    
+                    <textarea class="answer-input" placeholder="اكتب ترجمتك هنا..." id="translationInput"></textarea>
+                    
+                    <div style="display: flex; gap: 20px; margin-top: 30px;">
+                        <button class="btn-primary" onclick="checkTranslation()">
+                            <i class="fas fa-check-circle"></i>
+                            تحقق من الترجمة
+                        </button>
+                        <button class="btn-secondary" onclick="showHint()">
+                            <i class="fas fa-lightbulb"></i>
+                            عرض تلميح
+                        </button>
+                        <button class="btn-secondary" onclick="nextExercise()">
+                            <i class="fas fa-forward"></i>
+                            التمرين التالي
+                        </button>
+                    </div>
+                    
+                    <div id="translationResult" style="display: none; margin-top: 30px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Dashboard -->
+        <section class="progress-dashboard" id="progress">
+            <div class="dashboard-header">
+                <h2 class="section-title gradient-text">لوحة التقدم</h2>
+                <p class="section-subtitle">تابع تقدمك في تعلم الإنجليزية الطبية وحقق أهدافك التعليمية</p>
+            </div>
+
+            <div class="progress-cards">
+                <div class="progress-card">
+                    <div class="progress-circle">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle class="circle-bg" cx="60" cy="60" r="45"></circle>
+                            <circle class="circle-progress" cx="60" cy="60" r="45" data-progress="75"></circle>
+                        </svg>
+                        <div class="progress-text">75%</div>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">إجمالي التقدم</h3>
+                    <p style="color: var(--text-sec); font-size: 0.9rem;">اكتملت 75% من المسار التعليمي</p>
+                </div>
+
+                <div class="progress-card">
+                    <div class="progress-circle">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle class="circle-bg" cx="60" cy="60" r="45"></circle>
+                            <circle class="circle-progress" cx="60" cy="60" r="45" data-progress="90"></circle>
+                        </svg>
+                        <div class="progress-text">90%</div>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">دقة الإجابات</h3>
+                    <p style="color: var(--text-sec); font-size: 0.9rem;">متوسط دقة الإجابات في الاختبارات</p>
+                </div>
+
+                <div class="progress-card">
+                    <div class="progress-circle">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle class="circle-bg" cx="60" cy="60" r="45"></circle>
+                            <circle class="circle-progress" cx="60" cy="60" r="45" data-progress="60"></circle>
+                        </svg>
+                        <div class="progress-text">60%</div>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">الاستمرارية</h3>
+                    <p style="color: var(--text-sec); font-size: 0.9rem;">التزامك بالبرنامج التعليمي</p>
+                </div>
+
+                <div class="progress-card">
+                    <div class="progress-circle">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle class="circle-bg" cx="60" cy="60" r="45"></circle>
+                            <circle class="circle-progress" cx="60" cy="60" r="45" data-progress="45"></circle>
+                        </svg>
+                        <div class="progress-text">45%</div>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">المفردات</h3>
+                    <p style="color: var(--text-sec); font-size: 0.9rem;">نسبة حفظ المصطلحات الطبية</p>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn-primary" onclick="showDetailedProgress()">
+                    <i class="fas fa-chart-bar"></i>
+                    عرض التقرير التفصيلي
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="medical-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div style="width: 50px; height: 50px; background: var(--gradient-text); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 5px;">NUWAHUB Medical</h3>
+                        <p style="color: var(--text-sec); font-size: 0.9rem;">التميز في التعليم الطبي</p>
+                    </div>
+                </div>
+                <p style="color: var(--text-sec); line-height: 1.6;">
+                    منصة متكاملة لتعلم الإنجليزية الطبية، مصممة لتلبية احتياجات الطلاب والأطباء العرب في العصر الحديث.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="#home"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+                    <li><a href="#learning"><i class="fas fa-chevron-left"></i> المسار التعليمي</a></li>
+                    <li><a href="#quiz"><i class="fas fa-chevron-left"></i> التدريبات</a></li>
+                    <li><a href="#dictionary"><i class="fas fa-chevron-left"></i> القاموس</a></li>
+                    <li><a href="#practice"><i class="fas fa-chevron-left"></i> منطقة التطبيق</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>المستويات</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> المبتدئ</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> المتوسط</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> المتقدم</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الامتياز</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الأطباء</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>الدعم</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> المساعدة</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> تواصل معنا</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> شروط الاستخدام</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 NUWAHUB Medical English. جميع الحقوق محفوظة.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">مصمم بحب لطلاب الطب والأطباء العرب</p>
+        </div>
+    </footer>
+
+    <!-- Particles.js Library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <script>
+        // Initialize Particles.js Background
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: document.body.getAttribute('data-theme') === 'dark' ? "#60a5fa" : "#2b6cb0" },
+                shape: { type: "circle" },
+                opacity: { value: 0.3, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: document.body.getAttribute('data-theme') === 'dark' ? "#60a5fa" : "#2b6cb0",
+                    opacity: 0.1,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+
+        // Theme Toggle
+        const themeBtn = document.getElementById('themeBtn');
+        const themeIcon = themeBtn.querySelector('i');
+        
+        // Check saved theme
+        const savedTheme = localStorage.getItem('medical-theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+        themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.body.setAttribute('data-theme', newTheme);
+            themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('medical-theme', newTheme);
+            
+            // Update particles color
+            particlesJS("particles-js", {
+                particles: {
+                    color: { value: newTheme === 'dark' ? "#60a5fa" : "#2b6cb0" },
+                    line_linked: {
+                        color: newTheme === 'dark' ? "#60a5fa" : "#2b6cb0"
+                    }
+                }
+            });
+        });
+
+        // Navigation Scroll Effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const nav = document.getElementById('mainNav');
+            
+            if (currentScroll <= 0) {
+                nav.classList.remove('hidden');
+                return;
+            }
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.classList.add('hidden');
+            } else {
+                nav.classList.remove('hidden');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Animated Counter for Stats
+        function animateCounter() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target + '+';
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 20);
+            });
+        }
+
+        // Progress Bars Animation
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.path-progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                setTimeout(() => {
+                    bar.style.width = width + '%';
+                }, 300);
+            });
+        }
+
+        // Circle Progress Animation
+        function animateCircleProgress() {
+            const circles = document.querySelectorAll('.circle-progress');
+            circles.forEach(circle => {
+                const progress = circle.getAttribute('data-progress');
+                const circumference = 283; // 2 * π * r
+                const offset = circumference - (progress / 100) * circumference;
+                
+                setTimeout(() => {
+                    circle.style.strokeDashoffset = offset;
+                }, 500);
+            });
+        }
+
+        // Quiz Functionality
+        let selectedAnswer = null;
+        let correctAnswers = 8;
+        let currentQuestion = 2;
+
+        function selectQuizOption(element, answer) {
+            // Remove previous selection
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Select new option
+            element.classList.add('selected');
+            selectedAnswer = answer;
+        }
+
+        function submitAnswer() {
+            if (!selectedAnswer) {
+                alert('الرجاء اختيار إجابة أولاً');
+                return;
+            }
+
+            const correctAnswer = 'B'; // Anemia
+            const options = document.querySelectorAll('.quiz-option');
+            
+            if (selectedAnswer === correctAnswer) {
+                options[1].classList.add('correct');
+                correctAnswers++;
+                document.getElementById('correctCount').textContent = correctAnswers;
+                showNotification('إجابة صحيحة! أحسنت!', 'success');
+            } else {
+                options[selectedAnswer.charCodeAt(0) - 65].classList.add('wrong');
+                options[1].classList.add('correct');
+                showNotification('الإجابة غير صحيحة. المصطلح الصحيح هو Anemia', 'error');
+            }
+            
+            document.getElementById('submitBtn').style.display = 'none';
+            
+            setTimeout(() => {
+                nextQuestion();
+            }, 2000);
+        }
+
+        function skipQuestion() {
+            currentQuestion++;
+            if (currentQuestion > 10) currentQuestion = 1;
+            document.getElementById('currentQ').textContent = currentQuestion;
+            
+            // Reset quiz for next question
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'wrong');
+            });
+            
+            selectedAnswer = null;
+            document.getElementById('submitBtn').style.display = 'inline-block';
+            
+            // Update question (simulated)
+            const questions = [
+                "ما هو المصطلح الإنجليزي لـ 'ارتفاع ضغط الدم'؟",
+                "كيف تقول 'التهاب المفاصل' بالإنجليزية؟",
+                "ما ترجمة 'السكري من النوع الثاني'؟"
+            ];
+            
+            const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+            document.getElementById('currentQuestion').textContent = randomQuestion;
+        }
+
+        // Timer Function
+        function startTimer() {
+            let time = 120; // 2 minutes in seconds
+            const timerElement = document.getElementById('timer');
+            
+            const timer = setInterval(() => {
+                const minutes = Math.floor(time / 60);
+                const seconds = time % 60;
+                
+                timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (time <= 0) {
+                    clearInterval(timer);
+                    showNotification('انتهى الوقت!', 'error');
+                    submitAnswer();
+                }
+                
+                time--;
+            }, 1000);
+        }
+
+        // Medical Dictionary
+        const medicalTerms = [
+            {
+                arabic: "فقر الدم",
+                english: "Anemia",
+                category: "أمراض الدم",
+                pronunciation: "/əˈniːmiə/",
+                example: "Iron deficiency anemia is the most common type of anemia worldwide."
+            },
+            {
+                arabic: "ارتفاع ضغط الدم",
+                english: "Hypertension",
+                category: "أمراض القلب",
+                pronunciation: "/ˌhaɪpərˈtenʃən/",
+                example: "Essential hypertension accounts for 90-95% of all hypertension cases."
+            },
+            {
+                arabic: "داء السكري",
+                english: "Diabetes Mellitus",
+                category: "الغدد الصماء",
+                pronunciation: "/ˌdaɪəˈbiːtiːz məˈlaɪtəs/",
+                example: "Type 2 diabetes is characterized by insulin resistance and relative insulin deficiency."
+            },
+            {
+                arabic: "التهاب المفاصل",
+                english: "Arthritis",
+                category: "الروماتيزم",
+                pronunciation: "/ɑːrˈθraɪtɪs/",
+                example: "Rheumatoid arthritis is an autoimmune disorder that primarily affects joints."
+            },
+            {
+                arabic: "الربو",
+                english: "Asthma",
+                category: "أمراض الصدر",
+                pronunciation: "/ˈæzmə/",
+                example: "Asthma exacerbations are often triggered by allergens or respiratory infections."
+            },
+            {
+                arabic: "الالتهاب الرئوي",
+                english: "Pneumonia",
+                category: "أمراض الصدر",
+                pronunciation: "/nuːˈmoʊniə/",
+                example: "Community-acquired pneumonia is commonly caused by Streptococcus pneumoniae."
+            }
+        ];
+
+        function loadMedicalTerms() {
+            const grid = document.getElementById('termsGrid');
+            grid.innerHTML = '';
+            
+            medicalTerms.forEach(term => {
+                const card = document.createElement('div');
+                card.className = 'term-card fade-in';
+                card.innerHTML = `
+                    <div class="term-header">
+                        <div class="term-arabic">${term.arabic}</div>
+                        <div class="term-category">${term.category}</div>
+                    </div>
+                    <div class="term-english">${term.english}</div>
+                    <div class="term-pronunciation">
+                        <i class="fas fa-volume-up"></i>
+                        ${term.pronunciation}
+                    </div>
+                    <div class="term-example">${term.example}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function searchTerms(query) {
+            const filtered = medicalTerms.filter(term => 
+                term.arabic.includes(query) || 
+                term.english.toLowerCase().includes(query.toLowerCase()) ||
+                term.category.includes(query)
+            );
+            
+            const grid = document.getElementById('termsGrid');
+            grid.innerHTML = '';
+            
+            filtered.forEach(term => {
+                const card = document.createElement('div');
+                card.className = 'term-card fade-in';
+                card.innerHTML = `
+                    <div class="term-header">
+                        <div class="term-arabic">${term.arabic}</div>
+                        <div class="term-category">${term.category}</div>
+                    </div>
+                    <div class="term-english">${term.english}</div>
+                    <div class="term-pronunciation">
+                        <i class="fas fa-volume-up"></i>
+                        ${term.pronunciation}
+                    </div>
+                    <div class="term-example">${term.example}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Practice Area
+        function switchPracticeTab(tab) {
+            const tabs = document.querySelectorAll('.practice-tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            event.target.closest('.practice-tab').classList.add('active');
+            
+            const content = document.getElementById('practiceContent');
+            
+            switch(tab) {
+                case 'translation':
+                    content.innerHTML = `
+                        <div class="exercise-header">
+                            <h3 style="margin-bottom: 10px;">ترجمة الجمل الطبية</h3>
+                            <p style="color: var(--text-sec);">ترجم الجملة التالية من العربية إلى الإنجليزية مع مراعاة الدقة الطبية</p>
+                        </div>
+                        
+                        <div class="exercise-text" id="arabicText">
+                            "يشتكي المريض البالغ من العمر ٤٥ سنة من ألم حاد في الجانب الأيمن العلوي من البطن، مصحوباً بالغثيان والقيء، والذي يزداد سوءاً بعد تناول الوجبات الدسمة."
+                        </div>
+                        
+                        <textarea class="answer-input" placeholder="اكتب ترجمتك هنا..." id="translationInput"></textarea>
+                        
+                        <div style="display: flex; gap: 20px; margin-top: 30px;">
+                            <button class="btn-primary" onclick="checkTranslation()">
+                                <i class="fas fa-check-circle"></i>
+                                تحقق من الترجمة
+                            </button>
+                            <button class="btn-secondary" onclick="showHint()">
+                                <i class="fas fa-lightbulb"></i>
+                                عرض تلميح
+                            </button>
+                            <button class="btn-secondary" onclick="nextExercise()">
+                                <i class="fas fa-forward"></i>
+                                التمرين التالي
+                            </button>
+                        </div>
+                        
+                        <div id="translationResult" style="display: none; margin-top: 30px;"></div>
+                    `;
+                    break;
+                    
+                case 'listening':
+                    content.innerHTML = `
+                        <div class="exercise-header">
+                            <h3 style="margin-bottom: 10px;">تمارين الاستماع</h3>
+                            <p style="color: var(--text-sec);">استمع إلى المحادثة الطبية وأجب عن الأسئلة</p>
+                        </div>
+                        
+                        <div style="text-align: center; margin: 40px 0;">
+                            <div style="width: 80px; height: 80px; background: var(--primary-glow); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                                <i class="fas fa-headphones" style="font-size: 2.5rem; color: var(--primary);"></i>
+                            </div>
+                            <button class="btn-primary" onclick="playAudio()">
+                                <i class="fas fa-play"></i>
+                                تشغيل المحادثة
+                            </button>
+                        </div>
+                        
+                        <div class="exercise-text">
+                            <strong>السؤال:</strong> ما هي الأعراض الرئيسية التي ذكرها المريض في المحادثة؟
+                        </div>
+                        
+                        <textarea class="answer-input" placeholder="اكتب إجابتك هنا..." id="listeningAnswer"></textarea>
+                        
+                        <div style="display: flex; gap: 20px; margin-top: 30px;">
+                            <button class="btn-primary" onclick="checkListening()">
+                                <i class="fas fa-check-circle"></i>
+                                تحقق من الإجابة
+                            </button>
+                            <button class="btn-secondary" onclick="showTranscript()">
+                                <i class="fas fa-file-alt"></i>
+                                عرض النص
+                            </button>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+
+        function checkTranslation() {
+            const input = document.getElementById('translationInput').value.toLowerCase();
+            const correctAnswer = "the 45-year-old patient complains of sharp pain in the right upper quadrant of the abdomen, accompanied by nausea and vomiting, which worsens after consuming fatty meals.";
+            
+            const resultDiv = document.getElementById('translationResult');
+            
+            // Simple similarity check
+            const similarity = calculateSimilarity(input, correctAnswer);
+            
+            if (similarity > 0.7) {
+                resultDiv.innerHTML = `
+                    <div style="background: rgba(56, 161, 105, 0.1); padding: 20px; border-radius: 12px; border-right: 4px solid var(--success);">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <i class="fas fa-check-circle" style="color: var(--success); font-size: 1.5rem;"></i>
+                            <h4 style="margin: 0;">إجابة صحيحة!</h4>
+                        </div>
+                        <p style="margin-bottom: 10px;">ترجمتك ممتازة وتحتوي على المصطلحات الطبية الدقيقة.</p>
+                        <p style="color: var(--text-sec);"><strong>الإجابة المثالية:</strong> ${correctAnswer}</p>
+                    </div>
+                `;
+                showNotification('ترجمة ممتازة!', 'success');
+            } else {
+                resultDiv.innerHTML = `
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: 20px; border-radius: 12px; border-right: 4px solid #ef4444;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <i class="fas fa-exclamation-triangle" style="color: #ef4444; font-size: 1.5rem;"></i>
+                            <h4 style="margin: 0;">تحتاج إلى تحسين</h4>
+                        </div>
+                        <p style="margin-bottom: 10px;">ترجمتك تحتوي على بعض الأخطاء. راجع المصطلحات الطبية التالية:</p>
+                        <ul style="color: var(--text-sec); margin-right: 20px; margin-bottom: 10px;">
+                            <li>RUQ (Right Upper Quadrant) - الربع العلوي الأيمن من البطن</li>
+                            <li>Nausea and vomiting - الغثيان والقيء</li>
+                            <li>Fatty meals - الوجبات الدسمة</li>
+                        </ul>
+                        <p style="color: var(--text-sec);"><strong>الإجابة الصحيحة:</strong> ${correctAnswer}</p>
+                    </div>
+                `;
+                showNotification('تحتاج إلى مراجعة المصطلحات', 'warning');
+            }
+            
+            resultDiv.style.display = 'block';
+        }
+
+        function calculateSimilarity(str1, str2) {
+            // Simple similarity calculation
+            const words1 = str1.toLowerCase().split(/\s+/);
+            const words2 = str2.toLowerCase().split(/\s+/);
+            
+            const commonWords = words1.filter(word => words2.includes(word));
+            return commonWords.length / Math.max(words1.length, words2.length);
+        }
+
+        function showHint() {
+            showNotification('تلميح: ركز على ترجمة المصطلحات الطبية الدقيقة مثل "RUQ" و "fatty meals"', 'info');
+        }
+
+        function nextExercise() {
+            const exercises = [
+                "المريضة تبلغ من العمر ٣٠ سنة وتعاني من صداع نصفي متكرر مع اضطرابات بصرية تسبق نوبات الصداع.",
+                "يشتكي المريض من ضيق تنفس عند بذل الجهد مصحوب بسعال جاف مستمر منذ ثلاثة أشهر.",
+                "المريضة حامل في الأسبوع ٢٨ وتعاني من تورم في القدمين وارتفاع في ضغط الدم."
+            ];
+            
+            const randomExercise = exercises[Math.floor(Math.random() * exercises.length)];
+            document.getElementById('arabicText').textContent = randomExercise;
+            document.getElementById('translationInput').value = '';
+            document.getElementById('translationResult').style.display = 'none';
+        }
+
+        // Utility Functions
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                window.scrollTo({
+                    top: section.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function selectLevel(level) {
+            const levels = {
+                beginner: 'المبتدئ',
+                intermediate: 'المتوسط',
+                advanced: 'المتقدم'
+            };
+            
+            showNotification(`تم اختيار مستوى ${levels[level]} سيتم توجيهك إلى الدروس الخاصة بهذا المستوى`, 'info');
+            
+            // In real app: window.location.href = `level-${level}.html`;
+        }
+
+        function startLearning() {
+            showNotification('مرحباً بك في رحلة تعلم الإنجليزية الطبية!', 'success');
+            scrollToSection('learning');
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--danger)' : type === 'warning' ? 'var(--warning)' : 'var(--primary)'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 12px;
+                box-shadow: var(--card-shadow);
+                z-index: 10000;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+                max-width: 400px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            `;
+            
+            const icon = type === 'success' ? 'fa-check-circle' : 
+                        type === 'error' ? 'fa-exclamation-circle' : 
+                        type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle';
+            
+            notification.innerHTML = `
+                <i class="fas ${icon}" style="font-size: 1.2rem;"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 10);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        function showDetailedProgress() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(5px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                padding: 20px;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: var(--surface); border-radius: 24px; padding: 40px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); box-shadow: var(--card-shadow);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h3 style="font-size: 1.8rem; margin: 0;">التقرير التفصيلي</h3>
+                        <button onclick="this.closest('div').remove()" style="background: none; border: none; color: var(--text-sec); font-size: 1.5rem; cursor: pointer;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <h4 style="margin-bottom: 15px; color: var(--primary);">إحصائيات التعلم</h4>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                            <div style="background: var(--bg); padding: 15px; border-radius: 12px;">
+                                <div style="font-size: 0.9rem; color: var(--text-sec);">إجمالي ساعات التعلم</div>
+                                <div style="font-size: 2rem; font-weight: 900; color: var(--primary);">42</div>
+                            </div>
+                            <div style="background: var(--bg); padding: 15px; border-radius: 12px;">
+                                <div style="font-size: 0.9rem; color: var(--text-sec);">الدروس المكتملة</div>
+                                <div style="font-size: 2rem; font-weight: 900; color: var(--primary);">28</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <h4 style="margin-bottom: 15px; color: var(--primary);">التقدم حسب المهارات</h4>
+                        <div style="background: var(--bg); padding: 20px; border-radius: 12px;">
+                            <div style="margin-bottom: 15px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>المفردات</span>
+                                    <span>75%</span>
+                                </div>
+                                <div style="height: 8px; background: var(--border); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 75%; height: 100%; background: var(--primary);"></div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>الاستماع</span>
+                                    <span>60%</span>
+                                </div>
+                                <div style="height: 8px; background: var(--border); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 60%; height: 100%; background: var(--accent);"></div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>المحادثة</span>
+                                    <span>45%</span>
+                                </div>
+                                <div style="height: 8px; background: var(--border); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 45%; height: 100%; background: var(--success);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary" style="width: 100%;" onclick="this.closest('div').remove()">
+                        <i class="fas fa-download"></i>
+                        تحميل التقرير الكامل
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        // Mobile Menu
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Navigation Active State
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.nav-menu').style.display = 'none';
+                }
+            });
+        });
+
+        // Initialize everything when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            // Animate title
+            gsap.registerPlugin(TextPlugin);
+            gsap.to("#animatedTitle", {
+                duration: 2,
+                text: "اللغة التي تفتح آفاق الطب العالمي",
+                ease: "power2.inOut"
+            });
+
+            // Animate counters
+            animateCounter();
+            
+            // Animate progress bars
+            setTimeout(animateProgressBars, 500);
+            
+            // Animate circle progress
+            setTimeout(animateCircleProgress, 1000);
+            
+            // Load medical terms
+            loadMedicalTerms();
+            
+            // Start quiz timer
+            startTimer();
+            
+            // GSAP animations for sections
+            gsap.utils.toArray('.section-header, .path-card, .quiz-container, .term-card, .practice-content, .progress-card').forEach(el => {
+                gsap.from(el, {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 90%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 40,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: "power3.out"
+                });
+            });
+            
+            // Animate hero elements
+            gsap.from('.hero-badge', {
+                duration: 1,
+                y: -30,
+                opacity: 0,
+                ease: "power3.out"
+            });
+            
+            gsap.from('.hero-subtitle', {
+                duration: 1,
+                y: 30,
+                opacity: 0,
+                delay: 0.5,
+                ease: "power3.out"
+            });
+            
+            gsap.from('.hero-stats', {
+                duration: 1,
+                y: 40,
+                opacity: 0,
+                delay: 1,
+                ease: "power3.out"
+            });
+            
+            gsap.from('.hero-actions', {
+                duration: 1,
+                y: 50,
+                opacity: 0,
+                delay: 1.5,
+                ease: "power3.out"
+            });
+            
+            // Animate floating cards
+            gsap.from('.floating-card', {
+                scrollTrigger: {
+                    trigger: '.floating-cards',
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                scale: 0.8,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "back.out(1.7)"
+            });
+        });
+    </script>
+</body>
+</html>

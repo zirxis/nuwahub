@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السنة الأولى - طب الأسنان - NUWAHUB</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <style>
+	
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1a73e8;
+            --turquoise: #00acc1;
+            --dark-blue: #0d47a1;
+            --light-blue: #e3f2fd;
+            --white: #ffffff;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-600: #6c757d;
+            --gray-800: #343a40;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        @font-face {
+            font-family: 'Arabic';
+            src: url('Arabic.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            letter-spacing: 0.3px;
+            color: var(--gray-800);
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-size: 16px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+            color: var(--dark-blue);
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.2rem; }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+
+        button {
+            font-family: 'Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-800);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-top: 80px;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--primary-blue), var(--turquoise));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Subjects Grid */
+        .subjects-section {
+            padding: 4rem 0;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .subject-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .subject-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--turquoise));
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .subject-header i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subject-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subject-content {
+            padding: 2rem;
+        }
+
+        .study-info {
+            margin-bottom: 1.5rem;
+        }
+
+        .study-info h4 {
+            color: var(--dark-blue);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .study-info p {
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .tips-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .tips-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray-700);
+        }
+
+        .tips-list li i {
+            color: var(--turquoise);
+        }
+
+        .pdf-download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            margin-top: 1rem;
+            margin-right: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .pdf-download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+            background: linear-gradient(135deg, #20c997, #17a2b8);
+        }
+
+        .pdf-download-btn i {
+            margin-left: 0.5rem;
+        }
+
+        .video-section {
+            background: var(--light-blue);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+        }
+
+        .video-section h4 {
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .video-placeholder {
+            background: var(--white);
+            border: 2px dashed var(--turquoise);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            color: var(--gray-600);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .video-placeholder:hover {
+            background: var(--turquoise);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .page-header h1 { font-size: 2rem; }
+            .subjects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="resources/nuwahub-logo.png" alt="NUWAHUB Logo">
+                <span>NUWAHUB</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="dentistry.html">العودة</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-book"></i> السنة الأولى - طب الأسنان</h1>
+            <p>الأساسيات العلمية والطبية - بناء المعرفة القوية لمسيرتك في طب الأسنان</p>
+        </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section class="subjects-section">
+        <div class="container">
+            <div class="subjects-grid">
+                <!-- General Anatomy -->
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <i class="fas fa-user-md"></i>
+                        <h3>التشريح العام (General Anatomy)</h3>
+                        <p>دراسة بنية جسم الإنسان</p>
+                    </div>
+                    <div class="subject-content">
+                        <div class="study-info">
+                            <h4><i class="fas fa-book-open"></i> الملخص</h4>
+                            <p>دراسة شاملة لبنية جسم الإنسان والعظام والعضلات والأعضاء الداخلية بما يخدم طبيب الأسنان.</p>
+                            <button class="pdf-download-btn" onclick="downloadPDF('General Anatomy')">
+                                <i class="fas fa-download"></i> تحميل الملخص
+                            </button>
+                            <h4><i class="fas fa-lightbulb"></i> طريقة الدراسة</h4>
+                            <ul class="tips-list">
+                                <li><i class="fas fa-check-circle"></i> استخدم الأطلس التشريحي</li>
+                                <li><i class="fas fa-check-circle"></i> ركز على تشريح الرأس والعنق</li>
+                                <li><i class="fas fa-check-circle"></i> استخدم النماذج ثلاثية الأبعاد</li>
+                            </ul>
+                        </div>
+                        <div class="video-section">
+                            <h4><i class="fas fa-play-circle"></i> فيديوهات تعليمية</h4>
+                            <div class="video-placeholder" onclick="alert('فيديوهات قريباً')">
+                                <i class="fas fa-video fa-2x"></i>
+                                <p>فيديوهات التشريح العام</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- General Physiology -->
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <i class="fas fa-heartbeat"></i>
+                        <h3>الفسيولوجيا العامة (General Physiology)</h3>
+                        <p>وظائف أعضاء جسم الإنسان</p>
+                    </div>
+                    <div class="subject-content">
+                        <div class="study-info">
+                            <h4><i class="fas fa-book-open"></i> الملخص</h4>
+                            <p>دراسة وظائف الأعضاء والأنظمة الحيوية وكيفية تفاعلها مع بعضها البعض.</p>
+                            <button class="pdf-download-btn" onclick="downloadPDF('General Physiology')">
+                                <i class="fas fa-download"></i> تحميل الملخص
+                            </button>
+                            <h4><i class="fas fa-lightbulb"></i> طريقة الدراسة</h4>
+                            <ul class="tips-list">
+                                <li><i class="fas fa-check-circle"></i> افهم المفاهيم الأساسية</li>
+                                <li><i class="fas fa-check-circle"></i> اربط بين التشريح والوظيفة</li>
+                                <li><i class="fas fa-check-circle"></i> استخدم الرسوم التوضيحية</li>
+                            </ul>
+                        </div>
+                        <div class="video-section">
+                            <h4><i class="fas fa-play-circle"></i> فيديوهات تعليمية</h4>
+                            <div class="video-placeholder" onclick="alert('فيديوهات قريباً')">
+                                <i class="fas fa-video fa-2x"></i>
+                                <p>فيديوهات الفسيولوجيا</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Histology/Embryology -->
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <i class="fas fa-microscope"></i>
+                        <h3>الهستولوجيا والأجنة (Histology/Embryology)</h3>
+                        <p>دراسة الأنسجة وتطور الجنين</p>
+                    </div>
+                    <div class="subject-content">
+                        <div class="study-info">
+                            <h4><i class="fas fa-book-open"></i> الملخص</h4>
+                            <p>دراسة بنية الأنسجة المختلفة وتطور الأسنان والفك في الأجنة.</p>
+                            <button class="pdf-download-btn" onclick="downloadPDF('Histology/Embryology')">
+                                <i class="fas fa-download"></i> تحميل الملخص
+                            </button>
+                            <h4><i class="fas fa-lightbulb"></i> طريقة الدراسة</h4>
+                            <ul class="tips-list">
+                                <li><i class="fas fa-check-circle"></i> استخدم المجهر المشترك</li>
+                                <li><i class="fas fa-check-circle"></i> ادرس الصور النسيجية</li>
+                                <li><i class="fas fa-check-circle"></i> افهم تطور الأسنان</li>
+                            </ul>
+                        </div>
+                        <div class="video-section">
+                            <h4><i class="fas fa-play-circle"></i> فيديوهات تعليمية</h4>
+                            <div class="video-placeholder" onclick="alert('فيديوهات قريباً')">
+                                <i class="fas fa-video fa-2x"></i>
+                                <p>فيديوهات الهستولوجيا</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Genetics -->
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <i class="fas fa-dna"></i>
+                        <h3>الوراثة (Genetics)</h3>
+                        <p>علم الوراثة والصفات الموروثة</p>
+                    </div>
+                    <div class="subject-content">
+                        <div class="study-info">
+                            <h4><i class="fas fa-book-open"></i> الملخص</h4>
+                            <p>دراسة المبادئ الوراثية والعوامل الجينية المؤثرة على صحة الفم والأسنان.</p>
+                            <button class="pdf-download-btn" onclick="downloadPDF('Genetics')">
+                                <i class="fas fa-download"></i> تحميل الملخص
+                            </button>
+                            <h4><i class="fas fa-lightbulb"></i> طريقة الدراسة</h4>
+                            <ul class="tips-list">
+                                <li><i class="fas fa-check-circle"></i> افهم قوانين مندل</li>
+                                <li><i class="fas fa-check-circle"></i> ادرس الأمراض الوراثية</li>
+                                <li><i class="fas fa-check-circle"></i> طبق على أمراض الفم</li>
+                            </ul>
+                        </div>
+                        <div class="video-section">
+                            <h4><i class="fas fa-play-circle"></i> فيديوهات تعليمية</h4>
+                            <div class="video-placeholder" onclick="alert('فيديوهات قريباً')">
+                                <i class="fas fa-video fa-2x"></i>
+                                <p>فيديوهات الوراثة</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chemistry -->
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <i class="fas fa-flask"></i>
+                        <h3>الكيمياء (Chemistry)</h3>
+                        <p>المبادئ الأساسية للكيمياء</p>
+                    </div>
+                    <div class="subject-content">
+                        <div class="study-info">
+                            <h4><i class="fas fa-book-open"></i> الملخص</h4>
+                            <p>دراسة الكيمياء العامة والكيمياء التطبيقية في طب الأسنان.</p>
+                            <button class="pdf-download-btn" onclick="downloadPDF('Chemistry')">
+                                <i class="fas fa-download"></i> تحميل الملخص
+                            </button>
+                            <h4><i class="fas fa-lightbulb"></i> طريقة الدراسة</h4>
+                            <ul class="tips-list">
+                                <li><i class="fas fa-check-circle"></i> تعلم الجدول الدوري</li>
+                                <li><i class="fas fa-check-circle"></i> احل مسائل حسابية</li>
+                                <li><i class="fas fa-check-circle"></i> أجري التجارب المخبرية</li>
+                            </ul>
+                        </div>
+                        <div class="video-section">
+                            <h4><i class="fas fa-play-circle"></i> فيديوهات تعليمية</h4>
+                            <div class="video-placeholder" onclick="alert('فيديوهات قريباً')">
+                                <i class="fas fa-video fa-2x"></i>
+                                <p>فيديوهات الكيمياء</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biochemistry -->
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <i class="fas fa-atom"></i>
+                        <h3>الكيمياء الحيوية (Biochemistry)</h3>
+                        <p>الكيمياء في الأنظمة الحية</p>
+                    </div>
+                    <div class="subject-content">
+                        <div class="study-info">
+                            <h4><i class="fas fa-book-open"></i> الملخص</h4>
+                            <p>دراسة العمليات الكيميائية في جسم الإنسان والمهمة لطبيب الأسنان.</p>
+                            <button class="pdf-download-btn" onclick="downloadPDF('Biochemistry')">
+                                <i class="fas fa-download"></i> تحميل الملخص
+                            </button>
+                            <h4><i class="fas fa-lightbulb"></i> طريقة الدراسة</h4>
+                            <ul class="tips-list">
+                                <li><i class="fas fa-check-circle"></i> افهم المسارات الأيضية</li>
+                                <li><i class="fas fa-check-circle"></i> ادرس الإنزيمات</li>
+                                <li><i class="fas fa-check-circle"></i> طبق على الفم والأسنان</li>
+                            </ul>
+                        </div>
+                        <div class="video-section">
+                            <h4><i class="fas fa-play-circle"></i> فيديوهات تعليمية</h4>
+                            <div class="video-placeholder" onclick="alert('فيديوهات قريباً')">
+                                <i class="fas fa-video fa-2x"></i>
+                                <p>فيديوهات الكيمياء الحيوية</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Physics -->
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <i class="fas fa-wave-square"></i>
+                        <h3>الفيزياء (Physics)</h3>
+                        <p>مبادئ الفيزياء الأساسية</p>
+                    </div>
+                    <div class="subject-content">
+                        <div class="study-info">
+                            <h4><i class="fas fa-book-open"></i> الملخص</h4>
+                            <p>دراسة مبادئ الفيزياء وتطبيقاتها في طب الأسنان.</p>
+                            <button class="pdf-download-btn" onclick="downloadPDF('Physics')">
+                                <i class="fas fa-download"></i> تحميل الملخص
+                            </button>
+                            <h4><i class="fas fa-lightbulb"></i> طريقة الدراسة</h4>
+                            <ul class="tips-list">
+                                <li><i class="fas fa-check-circle"></i> افهم القوى والطاقة</li>
+                                <li><i class="fas fa-check-circle"></i> ادرس البصريات</li>
+                                <li><i class="fas fa-check-circle"></i> تعلم الكهرباء الحيوية</li>
+                            </ul>
+                        </div>
+                        <div class="video-section">
+                            <h4><i class="fas fa-play-circle"></i> فيديوهات تعليمية</h4>
+                            <div class="video-placeholder" onclick="alert('فيديوهات قريباً')">
+                                <i class="fas fa-video fa-2x"></i>
+                                <p>فيديوهات الفيزياء</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biophysics -->
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <i class="fas fa-microscope"></i>
+                        <h3>البيوفيزياء (Biophysics)</h3>
+                        <p>تطبيق الفيزياء على الأنظمة الحية</p>
+                    </div>
+                    <div class="subject-content">
+                        <div class="study-info">
+                            <h4><i class="fas fa-book-open"></i> الملخص</h4>
+                            <p>دراسة تطبيق الفيزياء على الأنظمة البيولوجية وخاصة في طب الأسنان.</p>
+                            <button class="pdf-download-btn" onclick="downloadPDF('Biophysics')">
+                                <i class="fas fa-download"></i> تحميل الملخص
+                            </button>
+                            <h4><i class="fas fa-lightbulb"></i> طريقة الدراسة</h4>
+                            <ul class="tips-list">
+                                <li><i class="fas fa-check-circle"></i> افهم الميكانيكا الحيوية</li>
+                                <li><i class="fas fa-check-circle"></i> ادرس الموجات فوق الصوتية</li>
+                                <li><i class="fas fa-check-circle"></i> طبق على طب الأسنان</li>
+                            </ul>
+                        </div>
+                        <div class="video-section">
+                            <h4><i class="fas fa-play-circle"></i> فيديوهات تعليمية</h4>
+                            <div class="video-placeholder" onclick="alert('فيديوهات قريباً')">
+                                <i class="fas fa-video fa-2x"></i>
+                                <p>فيديوهات البيوفيزياء</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biomathematics/Statistics -->
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>الإحصاء والرياضيات الحيوية</h3>
+                        <p>الرياضيات والإحصاء في العلوم الطبية</p>
+                    </div>
+                    <div class="subject-content">
+                        <div class="study-info">
+                            <h4><i class="fas fa-book-open"></i> الملخص</h4>
+                            <p>دراسة الأساليب الإحصائية والرياضيات الحيوية وتطبيقها في البحث والتحليل الطبي.</p>
+                            <button class="pdf-download-btn" onclick="downloadPDF('Biostatistics')">
+                                <i class="fas fa-download"></i> تحميل الملخص
+                            </button>
+                            <h4><i class="fas fa-lightbulb"></i> طريقة الدراسة</h4>
+                            <ul class="tips-list">
+                                <li><i class="fas fa-check-circle"></i> تعلم الإحصاء الأساسي</li>
+                                <li><i class="fas fa-check-circle"></i> استخدم برامج التحليل</li>
+                                <li><i class="fas fa-check-circle"></i> حل تمارين عملية</li>
+                            </ul>
+                        </div>
+                        <div class="video-section">
+                            <h4><i class="fas fa-play-circle"></i> فيديوهات تعليمية</h4>
+                            <div class="video-placeholder" onclick="alert('فيديوهات قريباً')">
+                                <i class="fas fa-video fa-2x"></i>
+                                <p>فيديوهات الإحصاء</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Health and Humanities -->
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <i class="fas fa-people-carry"></i>
+                        <h3>الصحة الاجتماعية والعلوم الإنسانية</h3>
+                        <p>الجوانب الإنسانية والاجتماعية</p>
+                    </div>
+                    <div class="subject-content">
+                        <div class="study-info">
+                            <h4><i class="fas fa-book-open"></i> الملخص</h4>
+                            <p>دراسة الجوانب الاجتماعية والنفسية والأخلاقية في الممارسة الطبية السنية.</p>
+                            <button class="pdf-download-btn" onclick="downloadPDF('Social Health')">
+                                <i class="fas fa-download"></i> تحميل الملخص
+                            </button>
+                            <h4><i class="fas fa-lightbulb"></i> طريقة الدراسة</h4>
+                            <ul class="tips-list">
+                                <li><i class="fas fa-check-circle"></i> ادرس علم الاجتماع الطبي</li>
+                                <li><i class="fas fa-check-circle"></i> تعلم مهارات التواصل</li>
+                                <li><i class="fas fa-check-circle"></i> افهم الأخلاقيات الطبية</li>
+                            </ul>
+                        </div>
+                        <div class="video-section">
+                            <h4><i class="fas fa-play-circle"></i> فيديوهات تعليمية</h4>
+                            <div class="video-placeholder" onclick="alert('فيديوهات قريباً')">
+                                <i class="fas fa-video fa-2x"></i>
+                                <p>فيديوهات الصحة الاجتماعية</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Languages -->
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <i class="fas fa-language"></i>
+                        <h3>اللغات: الفرنسية والإنجليزية</h3>
+                        <p>لغات الطب والعلوم</p>
+                    </div>
+                    <div class="subject-content">
+                        <div class="study-info">
+                            <h4><i class="fas fa-book-open"></i> الملخص</h4>
+                            <p>تطوير مهارات اللغة الفرنسية والإنجليزية للتواصل الطبي والبحث العلمي.</p>
+                            <button class="pdf-download-btn" onclick="downloadPDF('Languages')">
+                                <i class="fas fa-download"></i> تحميل الملخص
+                            </button>
+                            <h4><i class="fas fa-lightbulb"></i> طريقة الدراسة</h4>
+                            <ul class="tips-list">
+                                <li><i class="fas fa-check-circle"></i> تعلم المصطلحات الطبية</li>
+                                <li><i class="fas fa-check-circle"></i> مارس الاستماع والتحدث</li>
+                                <li><i class="fas fa-check-circle"></i> اقرأ المقالات الطبية</li>
+                            </ul>
+                        </div>
+                        <div class="video-section">
+                            <h4><i class="fas fa-play-circle"></i> فيديوهات تعليمية</h4>
+                            <div class="video-placeholder" onclick="alert('فيديوهات قريباً')">
+                                <i class="fas fa-video fa-2x"></i>
+                                <p>فيديوهات اللغات</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 NUWAHUB. جميع الحقوق محفوظة للمنصة التعليمية الطبية الجزائرية</p>
+        </div>
+    </footer>
+
+    <script>
+        function downloadPDF(subject) {
+            alert(`سيتم قريباً تحميل ملخص ${subject} بصيغة PDF`);
+        }
+
+        document.querySelectorAll('.video-placeholder').forEach(placeholder => {
+            placeholder.addEventListener('click', function() {
+                alert('سيتم فتح فيديوهات تعليمية قريباً!');
+            });
+        });
+    </script>
+</body>
+</html>
